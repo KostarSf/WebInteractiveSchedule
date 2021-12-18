@@ -5,6 +5,10 @@ import { useFonts } from 'expo-font';
 import Schedule from './screens/Schedule';
 import Options from './screens/Options';
 
+const data = {
+  groupName: 'ИСИТ 2121'
+}
+
 export default function App() {
   const [loaded] = useFonts({
     'Roboto': require('./assets/fonts/roboto/Roboto-Regular.ttf'),
@@ -31,11 +35,10 @@ export default function App() {
           style={{width: 22, height: 22, marginLeft: 20}}
         />
         <View style={{paddingLeft: 10, flex: 1}}>
-          <Text style={styles.appTitle}>ИСИТ 2121</Text>
+          <Text style={styles.appTitle}>{data.groupName}</Text>
           <Text style={styles.appSubtitle}>РАСПИСАНИЕ</Text>
         </View>
         <TouchableHighlight
-          activeOpacity={0.6}
           underlayColor="#F3F7FF"
           onPress={() => setIsSideMenuOpen(!isSideMenuOpen)}
         >
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'stretch',
+    alignItems: 'stretch'
   },
   header: {
     marginTop: SBar.currentHeight,
@@ -77,13 +80,15 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: '#44435C',
     letterSpacing: 1,
-    fontFamily: 'RobotoSlab'
+    fontFamily: 'RobotoSlab',
+    textTransform: 'uppercase'
   },
   appSubtitle: {
     fontSize: 10,
     lineHeight: 12,
     color: '#C0C3CF',
     letterSpacing: 0.5,
-    fontFamily: 'Roboto'
+    fontFamily: 'Roboto',
+    textTransform: 'uppercase'
   }
 });
