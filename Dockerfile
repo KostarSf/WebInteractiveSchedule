@@ -1,5 +1,6 @@
 FROM node:14-alpine as build
 WORKDIR /app
+RUN npm i -g expo-cli
 COPY . ./
 RUN npm ci
 RUN npm run build:web
