@@ -4,8 +4,6 @@ services:
   application:
     restart: unless-stopped
     container_name: aumsu_schedule
-    ports:
-      - "5000:80"
     build: .
 
 networks:
