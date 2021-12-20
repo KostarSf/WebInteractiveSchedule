@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  application:
+    restart: unless-stopped
+    container_name: aumsu_schedule
+    ports:
+      - "5000:80"
+    build: .
+
+networks:
+  default:
+    external:
+      name: server
