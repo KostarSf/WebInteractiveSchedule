@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, Image, StyleSheet, View, TouchableHighlight } from 'react-native';
+import { Text, Image, StyleSheet, View, TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 
 export interface ScheduleUser {
   userId: number;
@@ -67,55 +67,99 @@ export function CreateTeacher(name: string): iTeacher {
 }
 
 export type Props = {
-  lesson: iLesson
+  lesson: iLesson,
+  subgroup?: number,
+  showEditButtons?: boolean,
 }
 
 const Lesson: React.FC<Props> = ({
-  lesson
+  lesson,
+  subgroup,
+  showEditButtons = false
+}) => {
+  const [isExpandView, setIsExpandView] = useState(false);
+
+  let classes = [];
+  for (let i = 0; i < lesson.classes.length; i++) {
+    if (subgroup !== undefined &&
+      lesson.classes[i].subgroup !== undefined &&
+      lesson.classes[i].subgroup?.groupId !== subgroup) {
+        continue;
+      }
+
+    classes.push(
+      <View style={styles.lesson} key={i}>
+        <View style={styles.lessonTimeContainer}>
+          {(i === 0 || subgroup) && lesson.time &&
+            <>
+              <Text style={styles.lessonBeginTime}>{lesson.time?.beginTime}</Text>
+              {lesson.time?.endTime && <Text style={styles.lessonEndTime}>
+                {lesson.time?.endTime}</Text>
+              }
+            </>
+          }
+        </View>
+        <Class sClass={lesson.classes[i]}
+          showSubgroup={subgroup === undefined}/>
+      </View>
+    )
+  }
+
+  return (
+    <TouchableHighlight underlayColor="#F3F7FF" style={{ borderRadius: 5 }}
+      activeOpacity={1} onPress={() => setIsExpandView(!isExpandView)}>
+      <View>
+        {classes.map((item) => (item))}
+      </View>
+    </TouchableHighlight>
+  );
+}
+
+type ClassProps = {
+  sClass: iClass,
+  showSubgroup?: boolean,
+}
+
+const Class: React.FC<ClassProps> = ({
+  sClass,
+  showSubgroup = true
 }) => {
   const [isTeacherFullNameShow, setIsTeacherFullNameShow] = useState(false);
 
   return (
-    <Text>Пара</Text>
-    // <TouchableHighlight underlayColor="#F3F7FF" style={{borderRadius: 5}}
-    //   activeOpacity={1}
-    //   onPress={() => setIsTeacherFullNameShow(!isTeacherFullNameShow)}>
-    //   <View style={styles.lesson}>
-    //     <View style={styles.lessonTimeContainer}>
-    //       {showTime &&
-    //         <>
-    //           <Text style={styles.lessonBeginTime}>{beginTime}</Text>
-    //           {endTime && <Text style={styles.lessonEndTime}>{endTime}</Text>}
-    //         </>
-    //       }
-    //     </View>
-    //     <View style={styles.lessonInfoContainer}>
-    //       <View style={styles.lessonPrimaryInfo}>
-    //         <Text style={styles.lessonName} ellipsizeMode="tail" numberOfLines={2}>
-    //           {name}
-    //         </Text>
-    //         <View style={{flexDirection: "row", alignItems: "center"}}>
-    //           {subgroupId > 0 ?
-    //             <Text style={styles.subgroup}>{subgroupName}</Text> : <></>
-    //           }
-    //           <Image
-    //             source={GetIconByLessonType(type)}
-    //             style={{ width: 22, height: 22 }}
-    //           />
-    //         </View>
-    //       </View>
-    //       {type !== "event" ?
-    //         <View style={styles.lessonSecondaryInfo}>
-    //           <Text style={styles.teacherName}>
-    //             {isTeacherFullNameShow ? teacherFullName : teacherName}
-    //           </Text>
-    //           <Text style={styles.classroom}>{classroom}</Text>
-    //         </View> : <></>
-    //       }
-    //     </View>
-    //   </View>
-    // </TouchableHighlight>
-  );
+    <View style={styles.lessonInfoContainer}>
+      <View style={styles.lessonPrimaryInfo}>
+        <Text style={styles.lessonName} ellipsizeMode="tail" numberOfLines={2}>
+          {sClass.name}
+        </Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          {sClass.subgroup && showSubgroup &&
+            <Text style={styles.subgroup}>{sClass.subgroup?.name}</Text>
+          }
+          <Image
+            source={GetIconByLessonType(sClass.type)}
+            style={{ width: 22, height: 22 }}
+          />
+        </View>
+      </View>
+      {(sClass.teacher || sClass.classroom) &&
+        <View style={styles.lessonSecondaryInfo}>
+          {sClass.teacher &&
+            <TouchableOpacity style={{flexShrink: 1}} onPress={
+              () => setIsTeacherFullNameShow(!isTeacherFullNameShow)}>
+              <Text style={styles.teacherName}>
+                {isTeacherFullNameShow ? sClass.teacher?.name :
+                  sClass.teacher?.shortName}
+              </Text>
+            </TouchableOpacity>
+          }
+          {sClass.classroom &&
+            <Text style={styles.classroom}>{sClass.classroom}</Text>
+          }
+        </View>
+      }
+    </View>
+  )
 }
 
 enum LessonType {

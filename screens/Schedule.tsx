@@ -4,8 +4,6 @@ import WeekButton from '../components/WeekButton';
 import Lesson, { GroupSchedule } from "../components/Lesson";
 import { GetTestSchedule } from "../utils/TestUtils";
 
-const schedule: GroupSchedule = GetTestSchedule();
-
 const weekDays: Array<iWeekDay> = [
   {
     id: 0,
@@ -50,19 +48,34 @@ interface iWeekDay {
   shortName: string;
 }
 
-const Schedule = () => {
+export type Props = {
+  schedule: GroupSchedule
+}
+
+const Schedule: React.FC<Props> = ({
+  schedule,
+}) => {
   const [activeWeek, setActiveWeek] = useState(0);
-  const [activeDay, setActiveDay] = useState(0);
+  const [activeDay, setActiveDay] = useState(2);
   const [currentWeek, setCurrentWeek] = useState(0);
   const [currentDay, setCurrentDay] = useState(0);
+  const [currentSubgroup, setCurrentSubgroup] = useState(0);
 
   const onDayButtonPress = (dayId: number) => {
     setActiveDay(dayId);
   }
 
-  function isDayIsHolyday(weekId: number, dayId: number) {
-    return schedule.weeks[weekId].days[dayId].lessons === undefined ||
-      schedule.weeks[weekId].days[dayId].holyday
+  function isDayIsHolyday(weekId: number, dayId: number): boolean {
+    let day = getDayById(weekId, dayId);
+    return day === undefined ||
+      day.lessons === undefined ||
+      day.holyday === true
+  }
+
+  function getDayById(weekId: number, dayId: number) {
+    return schedule.weeks[weekId].days.find((item) => {
+      return item.dayId === dayId;
+    })
   }
 
   return (
@@ -70,13 +83,17 @@ const Schedule = () => {
       <ScrollView style={{ backgroundColor: '#FBFCFF' }}>
         <View style={styles.dayCard}>
           <View style={styles.dayInfo}>
-            <Text style={styles.dayName}>{weekDays[activeDay].name}</Text>
+            <Text style={styles.dayName}>
+              {weekDays[activeDay].name}
+            </Text>
             <Text style={styles.weekName}>{schedule.weeks[activeWeek].name} неделя</Text>
           </View>
           { !isDayIsHolyday(activeWeek, activeDay) &&
             <View style={styles.lessonsList}>
-              {schedule.weeks[activeWeek].days[activeDay].lessons?.map((lesson) => (
-                <Lesson key={lesson.orderId} lesson={lesson} />
+              {getDayById(activeWeek, activeDay)?.lessons?.map((lesson) => (
+                <Lesson key={lesson.orderId} lesson={lesson}
+                  subgroup={currentSubgroup}
+                />
               ))}
             </View>
           }
@@ -88,12 +105,16 @@ const Schedule = () => {
         }
       </ScrollView>
       <View style={styles.weekButtons}>
-        {weekDays.map((day) => (
-          <WeekButton key={day.id} dayId={day.id} dayName={weekDays[day.id].shortName}
-            active={day.id === activeDay} current={day.id === currentDay}
-            holyday={isDayIsHolyday(activeWeek, day.id)}
-            onPress={onDayButtonPress} />
-        ))}
+        <ScrollView horizontal={true} contentContainerStyle={{flexGrow: 1}}
+          showsHorizontalScrollIndicator={false}
+        >
+          {weekDays.map((day) => (
+            <WeekButton key={day.id} dayId={day.id} dayName={weekDays[day.id].shortName}
+              active={day.id === activeDay} current={day.id === currentDay}
+              holyday={isDayIsHolyday(activeWeek, day.id)}
+              onPress={onDayButtonPress} />
+          ))}
+        </ScrollView>
       </View>
     </>
   );
@@ -101,7 +122,7 @@ const Schedule = () => {
 
 const styles = StyleSheet.create({
   weekButtons: {
-    height: 50,
+    height: 60,
     flexDirection: 'row'
   },
   weekButtonsWeb: {

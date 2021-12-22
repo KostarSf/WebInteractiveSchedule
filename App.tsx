@@ -4,10 +4,14 @@ import { StyleSheet, Text, Image, View, StatusBar as SBar, TouchableHighlight } 
 import { useFonts } from 'expo-font';
 import Schedule from './screens/Schedule';
 import Options from './screens/Options';
+import { GetTestSchedule } from './utils/TestUtils';
+import { GroupSchedule } from './components/Lesson';
 
 const data = {
   groupName: 'ИСИТ 2121'
 }
+
+const scheduleData: GroupSchedule = GetTestSchedule();
 
 export default function App() {
   const [loaded] = useFonts({
@@ -57,7 +61,7 @@ export default function App() {
           </View>
         </TouchableHighlight>
       </View>
-      {isSideMenuOpen ? <Options /> : <Schedule /> }
+      {isSideMenuOpen ? <Options /> : <Schedule schedule={scheduleData}/> }
       <StatusBar style="auto" />
     </View>
   );

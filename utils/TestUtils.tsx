@@ -50,22 +50,39 @@ export function GetTestSchedule(): GroupSchedule {
             ]
           },
           {
-            dayId: 1,
-          },
-          {
             dayId: 2,
-          },
-          {
-            dayId: 3,
-          },
-          {
-            dayId: 4,
-          },
-          {
-            dayId: 5,
-          },
-          {
-            dayId: 6,
+            lessons: [
+              {
+                orderId: 0,
+                time: { beginTime: '8:40' },
+                classes: [
+                  {
+                    name: 'Построение',
+                    type: "event",
+                  }
+                ]
+              },
+              {
+                orderId: 1,
+                time: { beginTime: '9:00', endTime: '10:30' },
+                classes: [
+                  {
+                    name: 'Информационные технологии',
+                    type: "laboratory",
+                    teacher: CreateTeacher('Лейзерович Яков Давыдович'),
+                    classroom: '425',
+                    subgroup: { groupId: 0, name: 'ПГ1'}
+                  },
+                  {
+                    name: 'Технологии программирования',
+                    type: "laboratory",
+                    teacher: CreateTeacher('Сливанков Юрий Вячеславович'),
+                    classroom: '401',
+                    subgroup: { groupId: 1, name: 'ПГ2' }
+                  }
+                ]
+              },
+            ]
           }
         ]
       }

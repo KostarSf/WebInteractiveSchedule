@@ -42,7 +42,8 @@ const WeekButton: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   weekButtonContainer: {
-    flex: 1
+    flex: 1,
+    minWidth: 70
   },
   weekButton: {
     backgroundColor: '#fff',
