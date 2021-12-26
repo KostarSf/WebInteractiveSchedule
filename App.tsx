@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, Image, View, StatusBar as SBar, TouchableHighlight } from 'react-native';
 import { useFonts } from 'expo-font';
 import Schedule from './screens/Schedule';
 import Options from './screens/Options';
 import { GetTestSchedule } from './utils/TestUtils';
 import { GroupSchedule } from './components/Lesson';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const data = {
   groupName: 'ИСИТ 2121'
@@ -26,6 +28,26 @@ export default function App() {
   });
 
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const [isLoginedIn, setIsLoginedIn] = useState(false);
+
+  useEffect(() => {
+    SetStoredUserToken('XVlBzgbaiCMRAjWwhTHctcuAxhxKQFDaFpLSjFbc');
+    GetStoredUserToken().then((token) => {
+      if (token === null) {
+        return;
+      }
+
+      setIsLoginedIn(true);
+
+      let userGet = 'https://aumsu-portal.admire.social/api/user';
+      axios.get(
+        userGet,
+        { headers: { "Authorization": `Bearer ${token}` } }
+      ).then((responce) => {
+        console.log(responce);
+      })
+    });
+  }, []);
 
   if (!loaded) {
     return null;
@@ -65,6 +87,27 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
   );
+}
+
+const GetStoredUserToken = async () => {
+  try {
+    let token = await AsyncStorage.getItem('user_token');
+    console.log('User token: ' + token);
+    return token;
+  } catch(e) {
+    console.log("Error reading user token");
+    console.log(e);
+    return null;
+  }
+}
+
+const SetStoredUserToken = async (value:string) => {
+  try {
+    await AsyncStorage.setItem('user_token', value)
+  } catch(e) {
+    console.log("Error setting user token");
+    console.log(e);
+  }
 }
 
 const styles = StyleSheet.create({
