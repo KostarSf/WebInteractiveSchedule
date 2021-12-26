@@ -1,11 +1,12 @@
 import { CreateTeacher, GroupSchedule } from "../components/Lesson";
 
 export function GetTestSchedule(): GroupSchedule {
-  return {
-    groupId: 0,
+  let data: GroupSchedule = {
+    groupId: 3,
     groupName: 'ИСИТ 2121',
     weeks: [
       {
+        weekId: 3,
         name: 'нечетная',
         days: [
           {
@@ -71,7 +72,7 @@ export function GetTestSchedule(): GroupSchedule {
                     type: "laboratory",
                     teacher: CreateTeacher('Лейзерович Яков Давыдович'),
                     classroom: '425',
-                    subgroup: { groupId: 0, name: 'ПГ1'}
+                    subgroup: { groupId: 0, name: 'ПГ1' }
                   },
                   {
                     name: 'Технологии программирования',
@@ -88,4 +89,5 @@ export function GetTestSchedule(): GroupSchedule {
       }
     ]
   }
+  return data;
 }
