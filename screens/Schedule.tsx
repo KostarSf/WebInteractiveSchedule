@@ -48,15 +48,20 @@ interface iWeekDay {
   shortName: string;
 }
 
+export interface ScheduleState {
+  data: GroupSchedule | undefined;
+  state: "loading" | "error" | "ready" | "notexist"
+}
+
 export type Props = {
-  schedule: GroupSchedule
+  schedule: ScheduleState
 }
 
 const Schedule: React.FC<Props> = ({
   schedule,
 }) => {
   const [activeWeek, setActiveWeek] = useState(0);
-  const [activeDay, setActiveDay] = useState(2);
+  const [activeDay, setActiveDay] = useState(0);
   const [currentWeek, setCurrentWeek] = useState(0);
   const [currentDay, setCurrentDay] = useState(0);
   const [currentSubgroup, setCurrentSubgroup] = useState(0);
@@ -73,9 +78,25 @@ const Schedule: React.FC<Props> = ({
   }
 
   function getDayById(weekId: number, dayId: number) {
-    return schedule.weeks[weekId].days.find((item) => {
+    return schedule.data?.weeks[weekId].days.find((item) => {
       return item.dayId === dayId;
     })
+  }
+
+  if (schedule.state !== "ready") {
+    return (
+      <ScrollView style={styles.errorContainer}
+        contentContainerStyle={{justifyContent: "center", flex: 1}}
+      >
+        <Text style={styles.errorText}>
+          {
+            schedule.state === "loading" ? "Загрузка" :
+            schedule.state === "notexist" ? "Расписание для вас ещё не готово" :
+            schedule.state === "error" ? "Ошибка авторизации" : ""
+          }
+        </Text>
+      </ScrollView>
+    )
   }
 
   return (
@@ -86,7 +107,7 @@ const Schedule: React.FC<Props> = ({
             <Text style={styles.dayName}>
               {weekDays[activeDay].name}
             </Text>
-            <Text style={styles.weekName}>{schedule.weeks[activeWeek].name} неделя</Text>
+            <Text style={styles.weekName}>{schedule.data?.weeks[activeWeek].name} неделя</Text>
           </View>
           { !isDayIsHolyday(activeWeek, activeDay) &&
             <View style={styles.lessonsList}>
@@ -121,6 +142,18 @@ const Schedule: React.FC<Props> = ({
 }
 
 const styles = StyleSheet.create({
+  errorContainer: {
+    backgroundColor: '#FBFCFF',
+  },
+  errorText: {
+    textAlign: "center",
+    fontFamily: 'Roboto',
+    color: '#A8A7B5',
+    textTransform: "uppercase",
+    fontSize: 18,
+    lineHeight: 21,
+    padding: 40
+  },
   weekButtons: {
     height: 60,
     flexDirection: 'row'
