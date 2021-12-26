@@ -15,6 +15,7 @@ export interface GroupSchedule {
 }
 
 interface iWeek {
+  weekId: number;
   name: string;
   days: Array<iDay>;
 }
