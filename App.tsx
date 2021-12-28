@@ -7,6 +7,7 @@ import Options from './screens/Options';
 import { GroupSchedule } from './components/Lesson';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { GetTestSchedule } from './utils/TestUtils';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -83,6 +84,14 @@ export default function App() {
     });
   }, []);
 
+  const onDemoEnable = () => {
+    //setDemoEnable(true);
+    setScheduleData({
+      state: 'ready',
+      data: GetTestSchedule()
+    })
+  }
+
   if (!loaded) {
     return null;
   }
@@ -117,7 +126,7 @@ export default function App() {
           </View>
         </TouchableHighlight>
       </View>
-      {isSideMenuOpen ? <Options /> : <Schedule schedule={scheduleData}/> }
+      {isSideMenuOpen ? <Options /> : <Schedule schedule={scheduleData} onDemoPress={onDemoEnable}/> }
       <StatusBar style="auto" />
     </View>
   );

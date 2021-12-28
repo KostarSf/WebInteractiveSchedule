@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, ScrollView, StyleSheet, View, Image, Platform } from 'react-native';
+import { Text, ScrollView, StyleSheet, View, Image, Platform, TouchableOpacity } from 'react-native';
 import WeekButton from '../components/WeekButton';
 import Lesson, { GroupSchedule } from "../components/Lesson";
 import { GetTestSchedule } from "../utils/TestUtils";
@@ -54,17 +54,24 @@ export interface ScheduleState {
 }
 
 export type Props = {
-  schedule: ScheduleState
+  schedule: ScheduleState,
+  onDemoPress?: () => void,
 }
 
 const Schedule: React.FC<Props> = ({
   schedule,
+  onDemoPress = undefined,
 }) => {
   const [activeWeek, setActiveWeek] = useState(0);
   const [activeDay, setActiveDay] = useState(0);
   const [currentWeek, setCurrentWeek] = useState(0);
   const [currentDay, setCurrentDay] = useState(0);
-  const [currentSubgroup, setCurrentSubgroup] = useState(0);
+
+  const onDemoPressHook = () => {
+    if (onDemoPress !== undefined) {
+      onDemoPress();
+    }
+  }
 
   const onDayButtonPress = (dayId: number) => {
     setActiveDay(dayId);
@@ -83,6 +90,8 @@ const Schedule: React.FC<Props> = ({
     })
   }
 
+
+
   if (schedule.state !== "ready") {
     return (
       <ScrollView style={styles.errorContainer}
@@ -95,6 +104,9 @@ const Schedule: React.FC<Props> = ({
             schedule.state === "error" ? "Ошибка авторизации" : ""
           }
         </Text>
+        <TouchableOpacity style={styles.demoButton} onPress={onDemoPressHook}>
+          <Text style={styles.demoButtonText}>Демонстрационное расписание</Text>
+        </TouchableOpacity>
       </ScrollView>
     )
   }
@@ -142,6 +154,21 @@ const Schedule: React.FC<Props> = ({
 }
 
 const styles = StyleSheet.create({
+  demoButton: {
+    backgroundColor: '#99B9F5',
+    alignSelf: "center",
+    width: 220,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 3
+  },
+  demoButtonText: {
+    color: 'white',
+    fontFamily: 'RobotoCondensed-Bold',
+    textAlign: "center",
+    letterSpacing: .5,
+    textTransform: "uppercase"
+  },
   errorContainer: {
     backgroundColor: '#FBFCFF',
   },
