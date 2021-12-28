@@ -66,10 +66,22 @@ const Schedule: React.FC<Props> = ({
   const [activeDay, setActiveDay] = useState(0);
   const [currentWeek, setCurrentWeek] = useState(0);
   const [currentDay, setCurrentDay] = useState(0);
+  const [currentSubgroup, setCurrentSubgroup] = useState(undefined);
 
   const onDemoPressHook = () => {
     if (onDemoPress !== undefined) {
       onDemoPress();
+    }
+  }
+
+  const onChangeWeekButtonPress = () => {
+    if (schedule.data === undefined || schedule.data?.weeks.length < 2) return;
+
+    let weekCount = schedule.data?.weeks.length;
+    if (activeWeek + 1 === weekCount) {
+      setActiveWeek(0);
+    } else {
+      setActiveWeek(activeWeek + 1)
     }
   }
 
@@ -119,7 +131,13 @@ const Schedule: React.FC<Props> = ({
             <Text style={styles.dayName}>
               {weekDays[activeDay].name}
             </Text>
-            <Text style={styles.weekName}>{schedule.data?.weeks[activeWeek].name} неделя</Text>
+            <TouchableOpacity onPress={onChangeWeekButtonPress} style={styles.weekChangeButton}>
+              <Text style={styles.weekName}>{schedule.data?.weeks[activeWeek].name} неделя</Text>
+              <Image
+                source={require('../assets/icons/schedule/week_change.png')}
+                style={{ width: 12, height: 12, marginLeft: 2 }}
+              />
+            </TouchableOpacity>
           </View>
           { !isDayIsHolyday(activeWeek, activeDay) &&
             <View style={styles.lessonsList}>
@@ -154,6 +172,11 @@ const Schedule: React.FC<Props> = ({
 }
 
 const styles = StyleSheet.create({
+  weekChangeButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
+  },
   demoButton: {
     backgroundColor: '#99B9F5',
     alignSelf: "center",
@@ -214,7 +237,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     textTransform: "uppercase",
     fontSize: 12,
-    color: '#A8A7B5'
+    color: '#A8A7B5',
+    marginLeft: 4
   },
   lessonsList: {
     backgroundColor: 'white',
