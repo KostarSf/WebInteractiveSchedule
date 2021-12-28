@@ -67,6 +67,36 @@ export function CreateTeacher(name: string): iTeacher {
   return { name: name, shortName: shortName }
 }
 
+export function CreateDisplayTime(lessonOrder: number): iLessonTime {
+  switch (lessonOrder) {
+    case 0:
+      return {
+        beginTime: '8:40'
+      }
+    case 1:
+      return {
+        beginTime: '9:00',
+        endTime: '10:30'
+      }
+    case 2:
+      return {
+        beginTime: '10:40',
+        endTime: '12:10',
+      }
+    case 3: {
+      return {
+        beginTime: '12:20',
+        endTime: '13:50'
+      }
+    }
+    default: {
+      return {
+
+      }
+    }
+  }
+}
+
 export type Props = {
   lesson: iLesson,
   subgroup?: number,
