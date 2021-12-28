@@ -9,7 +9,7 @@ const Options: React.FC<Props> = ({ }) => {
             <View style={{flex: 1}}>
 
             </View>
-            <Text style={styles.copyrightText}>KostarSf © 2021</Text>
+            <Text style={styles.copyrightText}>KostarSf, Admire © 2021</Text>
         </View>
     );
 }
