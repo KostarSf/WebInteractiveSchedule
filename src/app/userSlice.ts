@@ -2,16 +2,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { UserData } from "./types";
 
-interface UserState {
+export interface UserState {
     status: 'blank' | 'loaded',
     data?: UserData
 }
 
 const initialState: UserState = {
-    status: 'blank',
+    status: 'blank'
 }
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
@@ -23,11 +23,11 @@ const userSlice = createSlice({
         },
         clear: (state) => {
             state = {
-                status: 'blank',
+                status: 'blank'
             }
         },
     },
-})
+});
 
 export const { set, clear } = userSlice.actions;
 export const selectUser = (state: RootState) => state.user.data;

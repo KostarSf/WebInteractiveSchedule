@@ -6,8 +6,8 @@ export const store = configureStore({
     reducer: {
         user: userReducer,
         schedule: scheduleReducer,
-    }
+    },
 });
 
-export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

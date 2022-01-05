@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "./store";
 
-interface ScheduleState {
+export interface ScheduleState {
     value: string
 }
 
@@ -9,7 +9,7 @@ const initialState: ScheduleState = {
     value: '{ schedule data}',
 }
 
-const scheduleSlice = createSlice({
+export const scheduleSlice = createSlice({
     name: 'schedule',
     initialState,
     reducers: {
