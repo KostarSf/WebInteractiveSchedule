@@ -1,0 +1,13 @@
+.scheduleViewer {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: #F3F7FF;
+}
+
+.dayContainer {
+    flex-grow: 1;
+    overflow-y: auto;
+}
