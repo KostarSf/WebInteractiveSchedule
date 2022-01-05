@@ -1,8 +1,17 @@
 import AppHeader from './components/appheader/AppHeader';
 import ScheduleViewer from './components/scheduleviewer/ScheduleViewer';
 import styles from './App.module.css';
+import { useEffect } from 'react';
+import { FetchUserByToken } from './app/api';
 
 function App() {
+    useEffect(() => {
+        const userToken = 'XVlBzgbaiCMRAjWwhTHctcuAxhxKQFDaFpLSjFbc';
+        FetchUserByToken(userToken, (user) => {
+            //console.log(user);
+        });
+    })
+
     const currentView = <ScheduleViewer />;
 
     return (
