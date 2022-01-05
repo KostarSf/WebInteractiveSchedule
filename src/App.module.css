@@ -2,4 +2,5 @@
     height: 100%;
     background-color: white;
 
+    composes: textRegular from './SharedStyles.module.css';
 }
