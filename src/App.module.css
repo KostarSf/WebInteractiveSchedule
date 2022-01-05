@@ -4,3 +4,7 @@
 
     composes: textRegular from './SharedStyles.module.css';
 }
+
+.main {
+    height: 100%;
+}
