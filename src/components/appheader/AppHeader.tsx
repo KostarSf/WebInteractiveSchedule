@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import styles from './AppHeader.module.css';
 import { useAppSelector } from '../../app/hooks';
@@ -11,17 +11,17 @@ interface Titles {
 
 function AppHeader() {
     const [titles, setTitles] = useState<Titles>({
-        title: 'Расписание', subtitle: ''
+        title: 'Расписание', subtitle: '  '
     });
 
     const user = useAppSelector(selectUser);
 
-    if (user) {
-        setTitles({
+    useEffect(() => {
+        user && setTitles({
             title: user.study_group.name,
             subtitle: 'Расписание'
         })
-    }
+    }, [user])
 
     return (
         <div className={styles.appHeader}>
