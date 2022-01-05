@@ -22,4 +22,4 @@ export const scheduleSlice = createSlice({
 export const { set } = scheduleSlice.actions;
 export const selectSchedule = (state: RootState) => state.schedule.value;
 
-export default scheduleSlice.userReducer;
+export default scheduleSlice.reducer;
