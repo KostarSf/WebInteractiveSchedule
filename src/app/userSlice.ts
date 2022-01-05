@@ -16,15 +16,12 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         set: (state, action: PayloadAction<UserData>) => {
-            state = {
-                status: 'loaded',
-                data: action.payload,
-            }
+            state.status = "loaded";
+            state.data = action.payload;
         },
         clear: (state) => {
-            state = {
-                status: 'blank'
-            }
+            state.status = 'blank';
+            state.data = undefined;
         },
     },
 });
