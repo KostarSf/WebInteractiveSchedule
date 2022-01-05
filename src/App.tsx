@@ -1,14 +1,18 @@
 import AppHeader from './components/appheader/AppHeader';
-import ScheduleViewer from './components/scheduleviewer/ScheduleViewer';
+import ScheduleViewer from './components/schedule/ScheduleViewer/index';
 import styles from './App.module.css';
 import { useEffect } from 'react';
 import { FetchUserByToken } from './app/api';
+import { useAppDispatch } from './app/hooks';
+import { set } from './app/userSlice';
 
 function App() {
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
         const userToken = 'XVlBzgbaiCMRAjWwhTHctcuAxhxKQFDaFpLSjFbc';
         FetchUserByToken(userToken, (user) => {
-            //console.log(user);
+            dispatch(set(user));
         });
     })
 
@@ -19,7 +23,7 @@ function App() {
             <header>
                 <AppHeader />
             </header>
-            <main>
+            <main className={styles.main}>
                 {currentView}
             </main>
         </div>
