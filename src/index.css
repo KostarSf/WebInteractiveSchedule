@@ -19,6 +19,13 @@ body {
 
 #root {
     height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 0.3rem;
+    overflow: hidden;
+    overflow-y: auto;
 }
 
 /* For testing purposes */
