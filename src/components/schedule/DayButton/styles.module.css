@@ -1,0 +1,24 @@
+.dayButton {
+    border-radius: 0;
+    border: 0;
+    background-color: transparent;
+
+    min-width: 70px;
+    flex-grow: 1;
+
+    composes: textRegularCondensed from '../../../SharedStyles.module.css';
+    color: #99B9F5;
+    font-size: 1.4rem;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.holiday {
+    color: #C0C3CF;
+}
+
+.selected {
+    background-color: #99B9F5;
+    color: white;
+}
