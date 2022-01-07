@@ -4,3 +4,9 @@
     font-size: 1.8rem;
     line-height: 2.1rem;
 }
+
+.textRegularCondensed {
+    composes: textRegular;
+
+    font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+}
