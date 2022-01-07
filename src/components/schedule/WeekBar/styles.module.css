@@ -1,4 +1,16 @@
 .weekBar {
     height: 60px;
+
+    display: flex;
+    flex-wrap: nowrap;
+
+    overflow-x: auto;
+
     background-color: white;
+}
+
+.weekBar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
 }

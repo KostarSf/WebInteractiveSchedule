@@ -1,17 +1,29 @@
+import { useState } from 'react';
 import DayButton, { DayData } from '../DayButton';
 import styles from './styles.module.css'
 
 function WeekBar() {
+    const [selectedDay, setSelectedDay] = useState(0);
+    const [workingDays, setWorkingDays] = useState([0, 1, 3, 4]);
+
+    const onDayButtonClickHandle = (id: number) => {
+        setSelectedDay(id);
+    }
+
     const weekDaysData = GenerateDaysDataArray();
-    const weekDaysButtons = weekDaysData.map((dayData) => {
-        return (
-            <DayButton key={dayData.id} data={dayData} />
-        )
-    })
+    const weekDaysButtons = weekDaysData.map(data =>
+        <DayButton
+            key={data.id}
+            data={data}
+            holiday={workingDays.indexOf(data.id) < 0 ? true : false}
+            selected={selectedDay===data.id}
+            onClick={onDayButtonClickHandle}
+        />
+    );
 
     return (
         <div className={styles.weekBar}>
-
+            {weekDaysButtons}
         </div>
     )
 }
