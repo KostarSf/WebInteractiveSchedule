@@ -1,11 +1,11 @@
-.scheduleViewer {
+.scheduleView {
     flex: 1;
 
     display: flex;
     flex-direction: column;
 
     max-height: 100%;
-    background-color: #F3F7FF;
+    background-color: #FBFCFF;
 
 }
 

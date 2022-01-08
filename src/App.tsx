@@ -1,5 +1,5 @@
 import AppHeader from './components/appheader/AppHeader';
-import ScheduleViewer from './components/schedule/ScheduleViewer/index';
+import ScheduleView from './components/schedule/ScheduleView';
 import styles from './App.module.css';
 import { useEffect } from 'react';
 import { FetchUserByToken } from './app/api';
@@ -16,7 +16,7 @@ function App() {
         });
     })
 
-    const currentView = <ScheduleViewer />;
+    const currentView = <ScheduleView />;
 
     return (
         <div className={styles.App}>
