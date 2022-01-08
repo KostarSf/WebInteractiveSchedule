@@ -18,6 +18,11 @@
     color: #C0C3CF;
 }
 
+.current {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid #99B9F5;
+}
+
 .selected {
     background-color: #99B9F5;
     color: white;

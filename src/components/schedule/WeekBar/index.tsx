@@ -4,7 +4,8 @@ import styles from './styles.module.css'
 
 function WeekBar() {
     const [selectedDay, setSelectedDay] = useState(0);
-    const [workingDays, setWorkingDays] = useState([0, 1, 3, 4]);
+    const currentDayId = 3;
+    const workingDays = [0, 1, 3, 4];
 
     const onDayButtonClickHandle = (id: number) => {
         setSelectedDay(id);
@@ -16,7 +17,8 @@ function WeekBar() {
             key={data.id}
             data={data}
             holiday={workingDays.indexOf(data.id) < 0 ? true : false}
-            selected={selectedDay===data.id}
+            selected={data.id === selectedDay}
+            currentDay={data.id === currentDayId}
             onClick={onDayButtonClickHandle}
         />
     );

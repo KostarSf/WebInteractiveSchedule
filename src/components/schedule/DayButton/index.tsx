@@ -11,10 +11,17 @@ type Props = {
     data: DayData;
     holiday?: boolean;
     selected?: boolean;
+    currentDay?: boolean;
     onClick?: (id: number) => void;
 }
 
-export const DayButton: FunctionComponent<Props> = ({ data, holiday, selected, onClick }) => {
+const DayButton: FunctionComponent<Props> = ({
+    data,
+    holiday,
+    selected,
+    currentDay,
+    onClick
+}) => {
     const onClickHandle = (event: React.MouseEvent<HTMLButtonElement>) => {
         onClick?.call(null, data.id);
     }
@@ -23,6 +30,7 @@ export const DayButton: FunctionComponent<Props> = ({ data, holiday, selected, o
         style.dayButton,
         {[style.selected]: selected},
         {[style.holiday]: holiday},
+        {[style.current]: currentDay}
     );
     
     return (
