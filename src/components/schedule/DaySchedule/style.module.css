@@ -1,0 +1,19 @@
+.daySchedule {
+
+}
+
+.header {
+    padding: 1rem;
+    background-color: #F3F7FF;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.dayName {
+    text-align: center;
+}
+
+.classesContainer {
+    padding: 1rem 2rem;
+    background-color: white;
+}
