@@ -1,0 +1,82 @@
+.classItem {
+    display: flex;
+    align-items: center;
+
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+}
+
+.timeColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 5rem;
+    margin-right: 1rem;
+}
+
+.beginTime {
+    font-weight: bold;
+}
+
+.endTime {
+    font-size: 1rem;
+    line-height: 1rem;
+    color: #9C9C9C;
+}
+
+.infoColumn {
+    flex-grow: 1;
+}
+
+.infoRow {
+    display: flex;
+    align-items: center;
+}
+
+.primaryInfo {
+    composes: infoRow;
+}
+
+.secondaryInfo {
+    composes: infoRow;
+    margin-top: 0.5rem;
+}
+
+.name {
+    flex-grow: 1;
+
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+}
+
+.groupName {
+
+}
+
+.type {
+    width: 22px;
+    height: 22px;
+}
+
+.teacher {
+    flex-grow: 1;
+
+    color: #9C9C9C;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    font-weight: lighter;
+}
+
+.place {
+    margin-left: 1rem;
+    padding: 0 0.5rem;
+
+    color: #9C9C9C;
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+
+    border: 1px solid #9C9C9C;
+    border-radius: 1px;
+}
