@@ -20,3 +20,33 @@ export type StudyGroupData = {
     created_at: string;
     updated_at: string;
 }
+
+export interface ScheduleData {
+    weeks: WeekScheduleData[];
+}
+
+export interface WeekScheduleData {
+    weekId: number;
+    weekName: string;
+    days: DayScheduleData[];
+}
+
+export interface DayScheduleData {
+    dayId: number;
+    dayName: string;
+    classes: ClassItemData[];
+}
+
+export interface ClassItemData {
+    order: number,
+    hideEndTime?: boolean,
+    lessons: LessonData[],
+}
+
+export interface LessonData {
+    name: string,
+    teacher?: string,
+    type?: 'lecture' | 'practice' | 'lab' | 'mixed',
+    place?: string,
+    subgroupId?: number,
+}
