@@ -4,54 +4,86 @@ import labIcon from './labIcon.svg';
 import lectureIcon from './lectureIcon.svg';
 import mixedIcon from './mixedIcon.svg';
 import practiceIcon from './practiceIcon.svg';
-
-export interface ClassItemData {
-    order: number,
-    name: string,
-    teacher?: string,
-    type?: 'lecture' | 'practice' | 'lab' | 'mixed',
-    place?: string,
-    hideEndTime?: boolean,
-}
+import classNames from "classnames";
+import style from "./styles.module.css";
+import {ClassItemData, LessonData} from "../../../app/types";
 
 type Props = {
-    data: ClassItemData
+    data: ClassItemData,
+    current?: boolean
 }
 
-const ClassItem: FunctionComponent<Props> = ({data}) => {
-    const [shortTeacherName, setShortTeacherName] = useState(true);
-
+const ClassItem: FunctionComponent<Props> = ({
+    data,
+    current = false
+}) => {
     const time = getClassTimeByOrder(data.order);
     const [displayBeginTime, displayEndTime] = getDisplayTime(time);
-    const typeImage = createTypeImage(data);
-    const showSecondaryInfo = data.teacher !== undefined || data.place !== undefined;
 
-    let teacherName = data.teacher && shortTeacherName ? getShortName(data.teacher) : data.teacher;
+    let lessonItems = data.lessons.map(lesson => {
+        return (
+            <LessonItem data={lesson} key={data.order + (lesson.subgroupId ? lesson.subgroupId : 0)}/>
+        )
+    })
 
-    const onTeacherNameClickHandle = () => setShortTeacherName(!shortTeacherName);
+    let className = classNames(
+        style.classItem,
+        {[style.current]: current}
+    )
 
     return (
-        <div className={styles.classItem}>
+        <div className={className}>
             <div className={styles.timeColumn}>
                 <p className={styles.beginTime}>{displayBeginTime}</p>
                 {!data.hideEndTime && <p className={styles.endTime}>{displayEndTime}</p>}
             </div>
             <div className={styles.infoColumn}>
-                <div className={styles.primaryInfo}>
-                    <p className={styles.name}>{data.name}</p>
-                    <p className={styles.groupName}></p>
-                    {typeImage}
-                </div>
-                {showSecondaryInfo &&
-                    <div className={styles.secondaryInfo}>
-                        {data.teacher && <p className={styles.teacher} onClick={onTeacherNameClickHandle}>{teacherName}</p>}
-                        {data.place && <p className={styles.place}>{data.place}</p>}
-                    </div>
-                }
+                {lessonItems}
             </div>
         </div>
     );
 };
+
+type LessonProps = {
+    data: LessonData
+}
+
+const LessonItem: FunctionComponent<LessonProps> = ({data}) => {
+    const [shortTeacherName, setShortTeacherName] = useState(true);
+
+    const typeImage = createTypeImage(data);
+    const showSecondaryInfo = data.teacher !== undefined || data.place !== undefined;
+
+    let subgroupName = getSubgroupNameById(data.subgroupId);
+    let teacherName = data.teacher && shortTeacherName ? getShortName(data.teacher) : data.teacher;
+
+    const onTeacherNameClickHandle = () => setShortTeacherName(!shortTeacherName);
+
+    return (
+        <div className={styles.lesson}>
+            <div className={styles.primaryInfo}>
+                <p className={styles.name}>{data.name}</p>
+                <p className={styles.groupName}>{subgroupName}</p>
+                {typeImage}
+            </div>
+            {showSecondaryInfo &&
+                <div className={styles.secondaryInfo}>
+                    {data.teacher && <p className={styles.teacher} onClick={onTeacherNameClickHandle}>{teacherName}</p>}
+                    {data.place && <p className={styles.place}>{data.place}</p>}
+                </div>
+            }
+        </div>
+    )
+}
+
+function getSubgroupNameById(subgroupId: number | undefined): string | undefined {
+    if (subgroupId === undefined) return undefined;
+    switch (subgroupId) {
+        case 0: return 'ПГ1';
+        case 1: return 'ПГ2';
+        default: return undefined;
+    }
+}
 
 function getShortName(fio: string) {
     const splitFio = fio.split(' ');
@@ -93,7 +125,7 @@ function getClassTimeByOrder(order: number): ClassTime {
     }
 }
 
-function createTypeImage({type}: ClassItemData): JSX.Element {
+function createTypeImage({type}: LessonData): JSX.Element {
     if (type === undefined) return <></>
 
     let imagePath:string;

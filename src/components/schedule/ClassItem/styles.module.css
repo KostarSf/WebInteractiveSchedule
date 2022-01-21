@@ -2,9 +2,15 @@
     display: flex;
     align-items: center;
 
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
+    padding: 1.5rem 1rem;
+
+    border-radius: 0.3rem;
 }
+
+.current {
+    background-color: #99B9F5;
+}
+
 
 .timeColumn {
     display: flex;
@@ -20,14 +26,26 @@
     font-weight: bold;
 }
 
+.current .beginTime {
+    color: white;
+}
+
 .endTime {
     font-size: 1rem;
     line-height: 1rem;
     color: #9C9C9C;
 }
 
+.current .endTime {
+    color: #395890;
+}
+
 .infoColumn {
     flex-grow: 1;
+}
+
+.lesson:not(:first-child) {
+    margin-top: 2rem;
 }
 
 .infoRow {
@@ -41,7 +59,7 @@
 
 .secondaryInfo {
     composes: infoRow;
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
 }
 
 .name {
@@ -51,8 +69,17 @@
     line-height: 1.6rem;
 }
 
-.groupName {
+.current .name {
+    color: white;
+}
 
+.groupName {
+    composes: textRegularCondensed from '../../../SharedStyles.module.css';
+
+    margin-right: 1rem;
+
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
 }
 
 .type {
@@ -65,8 +92,14 @@
 
     color: #9C9C9C;
     font-size: 1.4rem;
-    line-height: 1.6rem;
+    line-height: 1.4rem;
     font-weight: lighter;
+
+    cursor: pointer;
+}
+
+.current .teacher {
+    color: #395890;
 }
 
 .place {
@@ -79,4 +112,9 @@
 
     border: 1px solid #9C9C9C;
     border-radius: 1px;
+}
+
+.current .place {
+    color: #395890;
+    border-color: #395890;
 }
