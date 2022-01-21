@@ -1,15 +1,21 @@
-import React from 'react';
-import ClassItem, {ClassItemData} from '../ClassItem';
+import React, {FunctionComponent} from 'react';
+import ClassItem from '../ClassItem';
 import style from './style.module.css'
+import {DayScheduleData} from "../../../app/types";
 
-const DaySchedule = () => {
+type Props = {
+    data?: DayScheduleData;
+}
+
+const DaySchedule: FunctionComponent<Props> = ({data}) => {
     const dayId = 0;
-    const schedule = getTestSchedule();
+    const schedule = data;
     const currentDay = false;
 
-    const classesList = schedule.classes.map(cls => {
+    const classesList = schedule?.classes.map(cls => {
+        //let current = cls.order === 1;
         return (
-            <ClassItem data={cls} key={cls.order} />
+            <ClassItem data={cls} key={cls.order} /*current={current}*/ />
         )
     })
 
@@ -18,36 +24,14 @@ const DaySchedule = () => {
             <div className={style.header}>
                 <p className={style.dayName}>{getDayNameById(dayId)}</p>
             </div>
-            <div className={style.classesContainer}>
-                {classesList}
-            </div>
+            {schedule &&
+                <div className={style.classesContainer}>
+                    {classesList}
+                </div>
+            }
         </div>
     );
 };
-
-interface DaySchedule {
-    classes: ClassItemData[];
-}
-
-function getTestSchedule(): DaySchedule {
-    return {
-        classes: [
-            { order: 0, name: 'Построение', hideEndTime: true },
-            {
-                order: 1, name: 'Информационные технологии',
-                teacher: 'Лейзерович Яков Давыдович', type: 'lab', place: '425'
-            },
-            {
-                order: 2, name: 'Технологии программирования',
-                teacher: 'Сливанков Юрий Вячеславович', type: 'lab', place: '401'
-            },
-            {
-                order: 3, name: 'Операционные системы',
-                teacher: 'Малахов Сергей Олегович', type: 'lab', place: '433'
-            },
-        ]
-    }
-}
 
 function getDayNameById(id: number): string {
     switch (id) {
