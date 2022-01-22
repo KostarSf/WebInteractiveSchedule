@@ -1,20 +1,28 @@
 .daySchedule {
+    flex-grow: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
 
+    position: relative;
 }
 
-.header {
-    padding: 1rem;
-    background-color: #F3F7FF;
-    font-size: 1.8rem;
-    text-transform: uppercase;
-}
+.scrollableContainer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
-.dayName {
-    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .classesContainer {
-    padding: 1rem 2rem;
+    flex: 1;
+    max-width: 640px;
+    padding: 1rem;
     background-color: white;
 }
 
