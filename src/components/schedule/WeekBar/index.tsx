@@ -1,18 +1,36 @@
 import {FunctionComponent, useState} from 'react';
 import DayButton, { DayData } from '../DayButton';
 import styles from './styles.module.css'
+import {ScheduleData} from "../../../app/types";
 
 type WeekBarProps = {
+    scheduleData: ScheduleData | undefined;
     selectedDay: number;
+    selectedWeek: number;
     onDaySelect: (id: number) => void;
 }
 
+function getWorkingDays(scheduleData: ScheduleData | undefined,
+                        selectedWeek: number): number[] {
+    if (scheduleData === undefined) return [];
+
+    let workingDays: number[] = [];
+    scheduleData.weeks.find(week => week.weekId === selectedWeek)
+                ?.days.forEach((day) => {
+        workingDays.push(day.dayId);
+    })
+
+    return workingDays;
+}
+
 const WeekBar: FunctionComponent<WeekBarProps> = ({
+    scheduleData,
     selectedDay,
+    selectedWeek,
     onDaySelect,
 }) => {
     const currentDayId = -1;
-    const workingDays = [0, 1, 3, 4];
+    const workingDays = getWorkingDays(scheduleData, selectedWeek);
 
     const onDayButtonClickHandle = (id: number) => {
         onDaySelect(id);
