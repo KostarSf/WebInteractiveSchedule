@@ -5,6 +5,11 @@
     align-items: center;
 }
 
+.appHeaderContainer {
+    max-width: 640px;
+    margin: auto;
+}
+
 .logo {
     width: 22px;
     margin-left: 2rem;

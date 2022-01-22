@@ -24,11 +24,13 @@ function AppHeader() {
     }, [user])
 
     return (
-        <div className={styles.appHeader}>
-            <img src={logo} className={styles.logo} alt='logo'/>
-            <div className={styles.titleContainer}>
-                <p className={styles.title}>{titles.title}</p>
-                <p className={styles.subtitle}>{titles.subtitle}</p>
+        <div className={styles.appHeaderContainer}>
+            <div className={styles.appHeader}>
+                <img src={logo} className={styles.logo} alt='logo'/>
+                <div className={styles.titleContainer}>
+                    <p className={styles.title}>{titles.title}</p>
+                    <p className={styles.subtitle}>{titles.subtitle}</p>
+                </div>
             </div>
         </div>
     );
