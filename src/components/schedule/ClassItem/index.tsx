@@ -101,6 +101,7 @@ interface ClassTime {
 }
 
 function getClassTimeByOrder(order: number): ClassTime {
+    // TODO Move class times to schedule object because each school group may have different times
     switch (order) {
         case 0:
             return {
