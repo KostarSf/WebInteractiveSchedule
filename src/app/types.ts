@@ -22,6 +22,8 @@ export type StudyGroupData = {
 }
 
 export interface ScheduleData {
+    groupName: string;
+    groupEditorIds: number[];
     weeks: WeekScheduleData[];
 }
 

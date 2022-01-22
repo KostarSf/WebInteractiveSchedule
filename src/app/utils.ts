@@ -2,6 +2,8 @@ import {ScheduleData} from "./types";
 
 function getTestSchedule(): ScheduleData {
     return {
+        groupName: 'ИСИТ 2121',
+        groupEditorIds: [ 91 ],
         weeks: [
             {
                 weekId: 0,
