@@ -8,12 +8,12 @@ import classNames from "classnames";
 import style from "./styles.module.css";
 import {ClassItemData, LessonData} from "../../../app/types";
 
-type Props = {
+type ClassItemProps = {
     data: ClassItemData,
     current?: boolean
 }
 
-const ClassItem: FunctionComponent<Props> = ({
+const ClassItem: FunctionComponent<ClassItemProps> = ({
     data,
     current = false
 }) => {
@@ -22,7 +22,8 @@ const ClassItem: FunctionComponent<Props> = ({
 
     let lessonItems = data.lessons.map(lesson => {
         return (
-            <LessonItem data={lesson} key={data.order + (lesson.subgroupId ? lesson.subgroupId : 0)}/>
+            <LessonItem data={lesson}
+                        key={data.order + (lesson.subgroupId ? lesson.subgroupId : 0)}/>
         )
     })
 
