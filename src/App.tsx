@@ -4,7 +4,9 @@ import styles from './App.module.css';
 import { useEffect, useState } from 'react';
 import { FetchUserByToken } from './app/api';
 import { useAppDispatch } from './app/hooks';
-import { set } from './app/userSlice';
+import { set as setUser } from './app/userSlice';
+import { set as setSchedule } from './app/scheduleSlice';
+import {GetTestSchedule} from "./app/utils";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -14,7 +16,8 @@ function App() {
     useEffect(() => {
         const userToken = 'XVlBzgbaiCMRAjWwhTHctcuAxhxKQFDaFpLSjFbc';
         FetchUserByToken(userToken, (user) => {
-            dispatch(set(user));
+            dispatch(setUser(user));
+            dispatch(setSchedule(GetTestSchedule()));
         });
     })
 
