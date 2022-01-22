@@ -18,6 +18,7 @@ function App() {
         FetchUserByToken(userToken, (user) => {
             dispatch(setUser(user));
             dispatch(setSchedule(GetTestSchedule()));
+            document.title = user.study_group.name + " - Расписание";
         });
     })
 
