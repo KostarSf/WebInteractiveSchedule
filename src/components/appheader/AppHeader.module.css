@@ -18,11 +18,13 @@
 .title {
     font-family: 'Roboto Slab', 'Courier New', Courier, monospace;
     line-height: 1.8rem;
+    letter-spacing: 1px;
 }
 
 .subtitle {
     color: #C0C3CF;
     font-size: 1rem;
-    line-height: 1.2rem;
+    line-height: 1.4rem;
     text-transform: uppercase;
+    letter-spacing: 0.05rem;
 }

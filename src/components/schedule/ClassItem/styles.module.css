@@ -5,6 +5,8 @@
     padding: 1.5rem 1rem;
 
     border-radius: 0.3rem;
+
+    overflow-x: auto;
 }
 
 .current {
@@ -23,7 +25,7 @@
 }
 
 .beginTime {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .current .beginTime {
@@ -76,7 +78,7 @@
 .groupName {
     composes: textRegularCondensed from '../../../SharedStyles.module.css';
 
-    margin-right: 1rem;
+    margin: 0 1rem;
 
     font-size: 1.2rem;
     letter-spacing: 0.05em;
@@ -95,7 +97,7 @@
     line-height: 1.4rem;
     font-weight: lighter;
 
-    cursor: pointer;
+    composes: clickableElement from '../../../SharedStyles.module.css';
 }
 
 .current .teacher {
