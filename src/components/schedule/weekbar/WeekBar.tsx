@@ -1,6 +1,6 @@
 import {FunctionComponent} from 'react';
-import DayButton, { DayData } from '../DayButton';
-import styles from './styles.module.css'
+import DayButton, { DayData } from '../daybutton/DayButton';
+import style from './WeekBar.module.css'
 import {ScheduleData} from "../../../app/types";
 
 type WeekBarProps = {
@@ -49,7 +49,7 @@ const WeekBar: FunctionComponent<WeekBarProps> = ({
     );
 
     return (
-        <div className={styles.weekBar}>
+        <div className={style.weekBar}>
             {weekDaysButtons}
         </div>
     )

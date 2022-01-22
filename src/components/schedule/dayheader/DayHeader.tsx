@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import style from './style.module.css'
+import style from './DayHeader.module.css'
 import {ScheduleData} from "../../../app/types";
 import weekSwitcherIcon from "./weekSwitcherIcon.svg";
 

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { FunctionComponent } from "react"
-import style from './styles.module.css';
+import style from './DayButton.module.css';
 
 export interface DayData {
     id: number,

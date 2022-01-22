@@ -1,5 +1,5 @@
 import AppHeader from './components/appheader/AppHeader';
-import ScheduleView from './components/schedule/ScheduleView';
+import ScheduleView from './components/schedule/scheduleview/ScheduleView';
 import styles from './App.module.css';
 import { useEffect, useState } from 'react';
 import { FetchUserByToken } from './app/api';

@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
-import ClassItem from '../ClassItem';
-import style from './style.module.css'
+import ClassItem from '../classitem/ClassItem';
+import style from './DaySchedule.module.css'
 import {DayScheduleData, ScheduleData} from "../../../app/types";
 
 type DayScheduleProps = {

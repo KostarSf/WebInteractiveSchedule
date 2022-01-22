@@ -1,11 +1,11 @@
 import React, {FunctionComponent, useState} from 'react';
-import styles from './styles.module.css';
+import styles from './ClassItem.module.css';
 import labIcon from './labIcon.svg';
 import lectureIcon from './lectureIcon.svg';
 import mixedIcon from './mixedIcon.svg';
 import practiceIcon from './practiceIcon.svg';
 import classNames from "classnames";
-import style from "./styles.module.css";
+import style from "./ClassItem.module.css";
 import {ClassItemData, LessonData} from "../../../app/types";
 
 type ClassItemProps = {

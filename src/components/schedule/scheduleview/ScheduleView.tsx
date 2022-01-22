@@ -1,10 +1,10 @@
-import DaySchedule from '../DaySchedule';
-import WeekBar from '../WeekBar';
-import styles from './styles.module.css';
+import DaySchedule from '../dayschedule/DaySchedule';
+import WeekBar from '../weekbar/WeekBar';
+import style from './ScheduleView.module.css';
 import {useState} from "react";
 import {useAppSelector} from "../../../app/hooks";
 import {selectSchedule} from "../../../app/scheduleSlice";
-import DayHeader from "../DayHeader";
+import DayHeader from "../dayheader/DayHeader";
 
 function ScheduleView() {
     const scheduleData = useAppSelector(selectSchedule);
@@ -21,7 +21,7 @@ function ScheduleView() {
     }
 
     return (
-        <div className={styles.scheduleView}>
+        <div className={style.scheduleView}>
             <DayHeader scheduleData={scheduleData} selectedDay={selectedDay}
                        selectedWeek={selectedWeek} onWeekSwap={onWeekSwapHandle}/>
             <DaySchedule scheduleData={scheduleData} selectedDay={selectedDay}
