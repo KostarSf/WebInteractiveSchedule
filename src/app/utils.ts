@@ -66,3 +66,12 @@ export function GetTestSchedule(): ScheduleData {
         ]
     }
 }
+
+export function GetCurrentDay() {
+    const day = new Date().getDay();
+    if (day === 0) {
+        return 6;
+    } else {
+        return day - 1;
+    }
+}
