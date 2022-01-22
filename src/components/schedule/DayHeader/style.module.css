@@ -1,0 +1,29 @@
+.dayHeader {
+    padding: 1rem;
+    background-color: #F3F7FF;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.dayName {
+    text-align: center;
+    font-weight: 500;
+}
+
+.weekSwitcher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    composes: clickableElement from '../../../SharedStyles.module.css';
+}
+
+.weekSwitcherText {
+    color: #A8A7B5;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+
+.weekSwitcherIcon {
+    margin-left: 0.2rem;
+}
