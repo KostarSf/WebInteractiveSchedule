@@ -1,4 +1,4 @@
-import {FunctionComponent, useState} from 'react';
+import {FunctionComponent} from 'react';
 import DayButton, { DayData } from '../DayButton';
 import styles from './styles.module.css'
 import {ScheduleData} from "../../../app/types";
