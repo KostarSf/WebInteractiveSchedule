@@ -10,3 +10,16 @@
 
     font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
 }
+
+.clickableElement {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: opacity 0.2s ease;
+}
+
+.clickableElement:active {
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0.2;
+    transition: opacity 0s ease;
+}
