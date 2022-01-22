@@ -1,9 +1,9 @@
 FROM node:14-alpine as build
 WORKDIR /app
-RUN npm i -g expo-cli
+RUN npm i -g typescript
 COPY . ./
 RUN npm ci
-RUN npm run build:web
+RUN npm run build
 
 FROM nginx:stable-alpine
 COPY --from=build /app/web-build /var/www/html
