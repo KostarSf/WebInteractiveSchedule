@@ -1,15 +1,21 @@
 import React, {FunctionComponent} from 'react';
 import ClassItem from '../ClassItem';
 import style from './style.module.css'
-import {DayScheduleData} from "../../../app/types";
+import {DayScheduleData, ScheduleData} from "../../../app/types";
+import {useAppSelector} from "../../../app/hooks";
+import {selectSchedule} from "../../../app/scheduleSlice";
 
-type Props = {
-    data?: DayScheduleData;
+type DayScheduleProps = {
+    selectedDay: number;
 }
 
-const DaySchedule: FunctionComponent<Props> = ({data}) => {
+const DaySchedule: FunctionComponent<DayScheduleProps> = ({
+  selectedDay
+}) => {
+    const data = useAppSelector(selectSchedule);
+
     const dayId = 0;
-    const schedule = data;
+    const schedule = getDayScheduleByDayId(data, selectedDay);
     const currentDay = false;
 
     const classesList = schedule?.classes.map(cls => {
@@ -22,7 +28,7 @@ const DaySchedule: FunctionComponent<Props> = ({data}) => {
     return (
         <div className={style.daySchedule}>
             <div className={style.header}>
-                <p className={style.dayName}>{getDayNameById(dayId)}</p>
+                <p className={style.dayName}>{getDayNameById(selectedDay)}</p>
             </div>
             {schedule &&
                 <div className={style.classesContainer}>
@@ -32,6 +38,13 @@ const DaySchedule: FunctionComponent<Props> = ({data}) => {
         </div>
     );
 };
+
+function getDayScheduleByDayId(schedule: ScheduleData | undefined,
+                               dayId: number): DayScheduleData | undefined {
+    if (schedule === undefined) return undefined;
+
+    // TODO Finish the implementation of getDayScheduleByDayId method
+}
 
 function getDayNameById(id: number): string {
     switch (id) {

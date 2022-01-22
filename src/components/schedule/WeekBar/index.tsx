@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import {FunctionComponent, useState} from 'react';
 import DayButton, { DayData } from '../DayButton';
 import styles from './styles.module.css'
 
-function WeekBar() {
-    const [selectedDay, setSelectedDay] = useState(0);
+type WeekBarProps = {
+    selectedDay: number;
+    onDaySelect: (id: number) => void;
+}
+
+const WeekBar: FunctionComponent<WeekBarProps> = ({
+    selectedDay,
+    onDaySelect,
+}) => {
     const currentDayId = -1;
     const workingDays = [0, 1, 3, 4];
 
     const onDayButtonClickHandle = (id: number) => {
-        setSelectedDay(id);
+        onDaySelect(id);
     }
 
     const weekDaysData = GenerateDaysDataArray();
