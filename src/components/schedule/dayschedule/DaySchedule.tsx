@@ -31,7 +31,7 @@ const DaySchedule: FunctionComponent<DayScheduleProps> = ({
                     <div className={style.classesContainer}>
                         {classesList}
                     </div>
-                    :
+                    : scheduleData &&
                     <div className={style.weekendContainer}>
                         <p className={style.weekendText}>Выходной</p>
                     </div>
