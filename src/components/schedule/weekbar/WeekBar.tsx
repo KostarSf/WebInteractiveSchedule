@@ -1,5 +1,5 @@
 import {FunctionComponent} from 'react';
-import DayButton, { DayData } from '../daybutton/DayButton';
+import DayButton, { DayData } from './daybutton/DayButton';
 import style from './WeekBar.module.css'
 import {ScheduleData} from "../../../app/types";
 

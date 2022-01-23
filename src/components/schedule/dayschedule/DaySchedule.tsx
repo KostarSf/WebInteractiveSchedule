@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import ClassItem from '../classitem/ClassItem';
+import ClassItem from './classitem/ClassItem';
 import style from './DaySchedule.module.css'
 import {DayScheduleData, ScheduleData} from "../../../app/types";
 

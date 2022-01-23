@@ -6,7 +6,7 @@ import mixedIcon from './mixedIcon.svg';
 import practiceIcon from './practiceIcon.svg';
 import classNames from "classnames";
 import style from "./ClassItem.module.css";
-import {ClassItemData, LessonData} from "../../../app/types";
+import {ClassItemData, LessonData} from "../../../../app/types";
 
 type ClassItemProps = {
     data: ClassItemData,
