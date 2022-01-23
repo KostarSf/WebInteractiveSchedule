@@ -1,6 +1,14 @@
 .dayHeader {
-    padding: 1rem;
+    display: flex;
     background-color: #F3F7FF;
+
+    position: relative;
+}
+
+.dayHeaderContent {
+    flex: 1;
+
+    padding: 1rem;
     font-size: 1.8rem;
     text-transform: uppercase;
 }
@@ -11,6 +19,11 @@
 }
 
 .weekSwitcher {
+    composes: buttonStylesReset from '../../../SharedStyles.module.css';
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+
     display: flex;
     justify-content: center;
     align-items: center;

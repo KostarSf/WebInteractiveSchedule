@@ -20,6 +20,23 @@
 
 .clickableElement:active {
     -webkit-tap-highlight-color: transparent;
-    opacity: 0.2;
+    opacity: 0.3;
     transition: opacity 0s ease;
+}
+
+.buttonStylesReset {
+    border: 0;
+    padding: 0;
+    text-align: left;
+    background-color: transparent;
+}
+
+.headerButton {
+    composes: buttonStylesReset;
+
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+
+    composes: clickableElement;
 }

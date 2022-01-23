@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
 
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 2rem;
 
     border-radius: 0.3rem;
 
@@ -92,6 +92,8 @@
 .teacher {
     flex-grow: 1;
 
+    composes: buttonStylesReset from '../../../../SharedStyles.module.css';
+
     color: #9C9C9C;
     font-size: 1.4rem;
     line-height: 1.4rem;
@@ -114,6 +116,8 @@
 
     border: 1px solid #9C9C9C;
     border-radius: 1px;
+
+    text-transform: uppercase;
 }
 
 .current .place {
