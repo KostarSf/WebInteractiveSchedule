@@ -1,9 +1,9 @@
 import React, {FunctionComponent} from 'react';
-import style from './DayHeader.module.css'
+import style from './DayHeader.module.css';
 import {ScheduleData} from "../../../app/types";
 import weekSwitcherIcon from "./weekSwitcherIcon.svg";
-import {useAppSelector} from "../../../app/hooks";
-import {selectPreferences} from "../../../app/preferencesSlice";
+import EditModeButton from "./editmodebutton/EditModeButton";
+import EditTimingsButton from "./edittimingsbutton/EditTimingsButton";
 
 type DayHeaderProps = {
     scheduleData: ScheduleData | undefined;
@@ -18,8 +18,6 @@ const DayHeader: FunctionComponent<DayHeaderProps> = ({
     selectedWeek,
     onWeekSwap
 }) => {
-    const preferences = useAppSelector(selectPreferences);
-
     const weekName = scheduleData?.weeks.find(week => week.weekId === selectedWeek)?.weekName;
 
     const weekSwitcherClickHandle = () => {
@@ -29,13 +27,17 @@ const DayHeader: FunctionComponent<DayHeaderProps> = ({
 
     return (
         <div className={style.dayHeader}>
-            <p className={style.dayName}>{getDayNameById(selectedDay)}</p>
-            {weekName &&
-                <div className={style.weekSwitcher} onClick={weekSwitcherClickHandle}>
-                    <p className={style.weekSwitcherText}>{weekName} неделя</p>
-                    <img className={style.weekSwitcherIcon} src={weekSwitcherIcon} alt={'swap week icon'} />
-                </div>
-            }
+            <EditTimingsButton />
+            <div className={style.dayHeaderContent}>
+                <p className={style.dayName}>{getDayNameById(selectedDay)}</p>
+                {weekName &&
+                    <button className={style.weekSwitcher} onClick={weekSwitcherClickHandle}>
+                        <p className={style.weekSwitcherText}>{weekName} неделя</p>
+                        <img className={style.weekSwitcherIcon} src={weekSwitcherIcon} alt={'swap week icon'} />
+                    </button>
+                }
+            </div>
+            <EditModeButton />
         </div>
     );
 };

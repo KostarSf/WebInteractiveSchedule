@@ -2,6 +2,8 @@ import React, {FunctionComponent} from 'react';
 import ClassItem from './classitem/ClassItem';
 import style from './DaySchedule.module.css'
 import {DayScheduleData, ScheduleData} from "../../../app/types";
+import {useAppSelector} from "../../../app/hooks";
+import {selectPreferences} from "../../../app/preferencesSlice";
 
 type DayScheduleProps = {
     scheduleData: ScheduleData | undefined;
@@ -17,12 +19,26 @@ const DaySchedule: FunctionComponent<DayScheduleProps> = ({
     const schedule = getDayScheduleByDayId(scheduleData, selectedDay, selectedWeek);
     const currentDay = false;
 
-    const classesList = schedule?.classes.map(cls => {
-        //let current = cls.order === 1;
-        return (
-            <ClassItem data={cls} key={cls.order} /*current={current}*/ />
-        )
-    })
+    const preferences = useAppSelector(selectPreferences);
+
+    let classesList = undefined;
+    if (schedule !== undefined && scheduleData !== undefined) {
+        if (preferences.editMode) {
+            for (let i = 0; i < scheduleData.classTimes.length; i++) {
+                // TODO Решить как тут все развернуть со списком пар в режиме редактирования
+            }
+        } else {
+            classesList = schedule.classes.map(cls => {
+                //let current = cls.order === 1;
+                return (
+                    <ClassItem data={cls} key={cls.order}
+                               classTimes={scheduleData.classTimes}
+                        /*current={current}*/ />
+                )
+            })
+        }
+    }
+
 
     return (
         <div className={style.daySchedule}>

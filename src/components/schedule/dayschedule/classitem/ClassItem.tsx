@@ -6,18 +6,20 @@ import mixedIcon from './mixedIcon.svg';
 import practiceIcon from './practiceIcon.svg';
 import classNames from "classnames";
 import style from "./ClassItem.module.css";
-import {ClassItemData, LessonData} from "../../../../app/types";
+import {ClassItemData, ClassTime, LessonData} from "../../../../app/types";
 
 type ClassItemProps = {
     data: ClassItemData,
+    classTimes: ClassTime[],
     current?: boolean
 }
 
 const ClassItem: FunctionComponent<ClassItemProps> = ({
     data,
+    classTimes,
     current = false
 }) => {
-    const time = getClassTimeByOrder(data.order);
+    const time = getClassTimeByOrder(classTimes, data.order);
     const [displayBeginTime, displayEndTime] = getDisplayTime(time);
 
     let lessonItems = data.lessons.map(lesson => {
@@ -45,6 +47,15 @@ const ClassItem: FunctionComponent<ClassItemProps> = ({
     );
 };
 
+function getClassTimeByOrder(classTimes: ClassTime[], order: number): ClassTime {
+    const classTime = classTimes.find(classTime => classTime.order === order);
+    if (classTime) {
+        return classTime;
+    } else {
+        throw new Error("There is no classTime with order: " + order);
+    }
+}
+
 type LessonProps = {
     data: LessonData
 }
@@ -69,7 +80,7 @@ const LessonItem: FunctionComponent<LessonProps> = ({data}) => {
             </div>
             {showSecondaryInfo &&
                 <div className={styles.secondaryInfo}>
-                    {data.teacher && <p className={styles.teacher} onClick={onTeacherNameClickHandle}>{teacherName}</p>}
+                    {data.teacher && <button className={styles.teacher} onClick={onTeacherNameClickHandle}>{teacherName}</button>}
                     {data.place && <p className={styles.place}>{data.place}</p>}
                 </div>
             }
@@ -93,38 +104,6 @@ function getShortName(fio: string) {
         return fio;
     }
     return `${splitFio[0]} ${splitFio[1][0]}.${splitFio[2][0]}.`;
-}
-
-interface ClassTime {
-    begin: Date;
-    end: Date;
-}
-
-function getClassTimeByOrder(order: number): ClassTime {
-    // TODO Move class times to schedule object because each school group may have different times
-    switch (order) {
-        case 0:
-            return {
-                begin: new Date(0, 0, 0, 8, 40),
-                end: new Date(0, 0, 0, 8, 50),
-            }
-        case 1:
-            return {
-                begin: new Date(0, 0, 0, 9, 0),
-                end: new Date(0, 0, 0, 10, 30),
-            }
-        case 2:
-            return {
-                begin: new Date(0, 0, 0, 10, 40),
-                end: new Date(0, 0, 0, 12, 10),
-            }
-        case 3:
-            return {
-                begin: new Date(0, 0, 0, 12, 20),
-                end: new Date(0, 0, 0, 13, 50),
-            }
-        default: return { begin: new Date(0), end: new Date(0) }
-    }
 }
 
 function createTypeImage({type}: LessonData): JSX.Element {
@@ -161,7 +140,10 @@ function getDisplayTime(classTime: ClassTime):[string, string] {
         return hours + ':' + minutes;
     }
 
-    return [formatTime(classTime.begin), formatTime(classTime.end)];
+    const beginDate = new Date(classTime.begin);
+    const endDate = new Date(classTime.end);
+
+    return [formatTime(beginDate), formatTime(endDate)];
 }
 
 export default ClassItem;

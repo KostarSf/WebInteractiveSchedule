@@ -1,10 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "./store";
 import {GetCurrentDay} from "./utils";
+import {ScheduleData} from "./types";
 
 export interface Preferences {
     editMode: boolean;
     userIsEditor: boolean;
+    editingScheduleData: ScheduleData | undefined;
+    hasUnsavedChanges: boolean;
     selectedDay: number;
     selectedWeek: number;
 }
@@ -17,6 +20,8 @@ const initialState: PreferencesState = {
     value: {
         editMode: false,
         userIsEditor: false,
+        editingScheduleData: undefined,
+        hasUnsavedChanges: false,
         selectedDay: GetCurrentDay(),
         selectedWeek: 0,
     }

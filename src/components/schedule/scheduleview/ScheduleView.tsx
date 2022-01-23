@@ -4,12 +4,14 @@ import style from './ScheduleView.module.css';
 import {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {selectSchedule} from "../../../app/scheduleSlice";
-import DayHeader from "../dayheader/DayHeader";
 import {selectPreferences, setPreferences} from "../../../app/preferencesSlice";
+import DayHeader from "../dayheader/DayHeader";
 
 function ScheduleView() {
-    const scheduleData = useAppSelector(selectSchedule);
     const preferences = useAppSelector(selectPreferences);
+    const currentScheduleData = useAppSelector(selectSchedule);
+    const scheduleData = preferences.editMode ?
+            preferences.editingScheduleData : currentScheduleData;
     const dispatch = useAppDispatch();
 
     const [selectedDay, setSelectedDay] = useState(preferences.selectedDay);
