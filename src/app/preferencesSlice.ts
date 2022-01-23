@@ -24,13 +24,13 @@ export const preferencesSlice = createSlice({
     name: 'preferences',
     initialState,
     reducers: {
-        set: (state, action: PayloadAction<Preferences>) => {
+        setPreferences: (state, action: PayloadAction<Preferences>) => {
             state.value = action.payload;
         }
     }
 })
 
-export const { set } = preferencesSlice.actions;
+export const { setPreferences } = preferencesSlice.actions;
 export const selectPreferences = (state: RootState) => state.preferences.value;
 
 export default preferencesSlice.reducer;

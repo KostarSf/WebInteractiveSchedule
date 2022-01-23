@@ -5,7 +5,7 @@ import {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {selectSchedule} from "../../../app/scheduleSlice";
 import DayHeader from "../dayheader/DayHeader";
-import {selectPreferences, set} from "../../../app/preferencesSlice";
+import {selectPreferences, setPreferences} from "../../../app/preferencesSlice";
 
 function ScheduleView() {
     const scheduleData = useAppSelector(selectSchedule);
@@ -17,12 +17,12 @@ function ScheduleView() {
 
     const onDaySelectHandle = (id: number) => {
         setSelectedDay(id);
-        dispatch(set({...preferences, selectedDay: id}));
+        dispatch(setPreferences({...preferences, selectedDay: id}));
     }
 
     const onWeekSwapHandle = (id: number) => {
         setSelectedWeek(id);
-        dispatch(set({...preferences, selectedWeek: id}));
+        dispatch(setPreferences({...preferences, selectedWeek: id}));
     }
 
     return (

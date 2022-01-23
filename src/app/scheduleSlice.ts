@@ -14,16 +14,16 @@ export const scheduleSlice = createSlice({
     name: 'schedule',
     initialState,
     reducers: {
-        set: (state, action: PayloadAction<ScheduleData>) => {
+        setSchedule: (state, action: PayloadAction<ScheduleData>) => {
             state.value = action.payload;
         },
-        clear: (state) => {
+        clearSchedule: (state) => {
             state.value = undefined;
         },
     }
 })
 
-export const { set, clear } = scheduleSlice.actions;
+export const { setSchedule, clearSchedule } = scheduleSlice.actions;
 export const selectSchedule = (state: RootState) => state.schedule.value;
 
 export default scheduleSlice.reducer;

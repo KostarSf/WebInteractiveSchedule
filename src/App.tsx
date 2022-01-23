@@ -3,13 +3,14 @@ import ScheduleView from './components/schedule/scheduleview/ScheduleView';
 import styles from './App.module.css';
 import { useEffect, useState } from 'react';
 import { FetchUserByToken } from './app/api';
-import { useAppDispatch } from './app/hooks';
-import { set as setUser } from './app/userSlice';
-import { set as setSchedule } from './app/scheduleSlice';
+import {useAppDispatch, useAppSelector} from './app/hooks';
+import { setUser } from './app/userSlice';
+import { setSchedule } from './app/scheduleSlice';
 import {GetTestSchedule} from "./app/utils";
 
 function App() {
     const dispatch = useAppDispatch();
+    const preferences = useAppSelector(selectPreferences);
 
     const [headless, setHeadless] = useState(false);
 
