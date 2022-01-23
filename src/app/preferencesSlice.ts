@@ -4,6 +4,7 @@ import {GetCurrentDay} from "./utils";
 
 export interface Preferences {
     editMode: boolean;
+    userIsEditor: boolean;
     selectedDay: number;
     selectedWeek: number;
 }
@@ -15,6 +16,7 @@ export interface PreferencesState {
 const initialState: PreferencesState = {
     value: {
         editMode: false,
+        userIsEditor: false,
         selectedDay: GetCurrentDay(),
         selectedWeek: 0,
     }

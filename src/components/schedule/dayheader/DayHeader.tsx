@@ -2,6 +2,8 @@ import React, {FunctionComponent} from 'react';
 import style from './DayHeader.module.css'
 import {ScheduleData} from "../../../app/types";
 import weekSwitcherIcon from "./weekSwitcherIcon.svg";
+import {useAppSelector} from "../../../app/hooks";
+import {selectPreferences} from "../../../app/preferencesSlice";
 
 type DayHeaderProps = {
     scheduleData: ScheduleData | undefined;
@@ -16,6 +18,8 @@ const DayHeader: FunctionComponent<DayHeaderProps> = ({
     selectedWeek,
     onWeekSwap
 }) => {
+    const preferences = useAppSelector(selectPreferences);
+
     const weekName = scheduleData?.weeks.find(week => week.weekId === selectedWeek)?.weekName;
 
     const weekSwitcherClickHandle = () => {
