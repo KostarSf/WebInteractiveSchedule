@@ -1,8 +1,8 @@
 import React, {FunctionComponent} from 'react';
 import style from './BackButton.module.css';
-import {AppViews} from "../../../../app/types";
-import {useAppDispatch} from "../../../../app/hooks";
-import {setAppView} from "../../../../app/preferencesSlice";
+import {AppViews} from "../../../../../app/types";
+import {useAppDispatch} from "../../../../../app/hooks";
+import {setAppView} from "../../../../../app/preferencesSlice";
 import backIcon from './backIcon.svg';
 
 type BackButtonProps = {

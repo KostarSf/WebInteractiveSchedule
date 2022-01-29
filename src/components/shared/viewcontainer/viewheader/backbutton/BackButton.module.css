@@ -1,5 +1,5 @@
 .backButton {
-    composes: headerButton from '../../../../SharedStyles.module.css';
+    composes: headerButton from '../../../../../SharedStyles.module.css';
 
     position: absolute;
     top: 0;

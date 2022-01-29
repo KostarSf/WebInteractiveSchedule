@@ -1,7 +1,7 @@
 import React, {FunctionComponent, PropsWithChildren} from 'react';
 import style from './ViewContainer.module.css';
-import ViewHeader, {ViewHeaderProps} from "../viewheader/ViewHeader";
-import ViewContent from "../viewcontent/ViewContent";
+import ViewHeader, {ViewHeaderProps} from "./viewheader/ViewHeader";
+import ViewContent from "./viewcontent/ViewContent";
 
 type ViewContainerProps = {
     headerProps: ViewHeaderProps,
