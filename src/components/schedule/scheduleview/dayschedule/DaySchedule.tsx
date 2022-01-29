@@ -1,15 +1,15 @@
-import React, {cloneElement, FunctionComponent} from 'react';
+import React, {FunctionComponent} from 'react';
 import ClassItem, {NewClassItem} from './classitem/ClassItem';
 import style from './DaySchedule.module.css'
-import {DayScheduleData, ScheduleData} from "../../../../app/types";
+import {AppViews, DayScheduleData, ScheduleData} from "../../../../app/types";
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {
     selectPreferences,
+    setAppView,
     setPreferences,
-    setPreferencesUpdateEditingDayScheduleData, switchMorningFormationState
+    switchMorningFormationState
 } from "../../../../app/preferencesSlice";
 import {getDayNameById} from "../../../../app/utils";
-import {selectUser} from "../../../../app/userSlice";
 
 type DayScheduleProps = {
     scheduleData: ScheduleData | undefined;
@@ -33,6 +33,9 @@ const DaySchedule: FunctionComponent<DayScheduleProps> = ({
 
         if (order === 0) {
             dispatch(switchMorningFormationState({selectedWeek, selectedDay}));
+        } else {
+            dispatch(setPreferences({...preferences, selectedClass: order}));
+            dispatch(setAppView(AppViews.ClassEdit));
         }
     }
 
