@@ -28,17 +28,19 @@ const DayHeader: FunctionComponent<DayHeaderProps> = ({
 
     return (
         <div className={style.dayHeader}>
-            <EditTimingsButton />
-            <div className={style.dayHeaderContent}>
-                <p className={style.dayName}>{getDayNameById(selectedDay)}</p>
-                {weekName &&
-                    <button className={style.weekSwitcher} onClick={weekSwitcherClickHandle}>
-                        <p className={style.weekSwitcherText}>{weekName} неделя</p>
-                        <img className={style.weekSwitcherIcon} src={weekSwitcherIcon} alt={'swap week icon'} />
-                    </button>
-                }
+            <div className={style.dayHeaderWrapper}>
+                <EditTimingsButton />
+                <div className={style.dayHeaderContent}>
+                    <p className={style.dayName}>{getDayNameById(selectedDay)}</p>
+                    {weekName &&
+                        <button className={style.weekSwitcher} onClick={weekSwitcherClickHandle}>
+                            <p className={style.weekSwitcherText}>{weekName} неделя</p>
+                            <img className={style.weekSwitcherIcon} src={weekSwitcherIcon} alt={'swap week icon'} />
+                        </button>
+                    }
+                </div>
+                <EditModeButton />
             </div>
-            <EditModeButton />
         </div>
     );
 };

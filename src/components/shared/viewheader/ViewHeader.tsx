@@ -20,9 +20,11 @@ const ViewHeader: FunctionComponent<ViewHeaderProps> = ({
 
     return (
         <div className={style.viewHeader}>
-            <BackButton backTo={backTo} onClick={onBackHandle}/>
-            <div className={style.viewHeaderContent}>
-                <p className={style.title}>{title}</p>
+            <div className={style.viewHeaderWrapper}>
+                <BackButton backTo={backTo} onClick={onBackHandle}/>
+                <div className={style.viewHeaderContent}>
+                    <p className={style.title}>{title}</p>
+                </div>
             </div>
         </div>
     );

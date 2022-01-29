@@ -1,10 +1,14 @@
 .dayHeader {
+    background-color: #F3F7FF;
+}
+
+.dayHeaderWrapper {
+    max-width: 640px;
     height: 60px;
+    margin: 0 auto;
 
     display: flex;
     align-items: center;
-    background-color: #F3F7FF;
-
     position: relative;
 }
 
