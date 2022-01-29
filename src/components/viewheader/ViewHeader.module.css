@@ -1,0 +1,22 @@
+.viewHeader {
+    min-height: 60px;
+
+    display: flex;
+    align-items: center;
+    background-color: #F3F7FF;
+
+    position: relative;
+}
+
+.viewHeaderContent {
+    flex: 1;
+
+    padding: 1rem 6rem;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.title {
+    text-align: center;
+    font-weight: 500;
+}
