@@ -10,6 +10,7 @@ export interface Preferences {
     hasUnsavedChanges: boolean;
     selectedDay: number;
     selectedWeek: number;
+    selectedClass: number | undefined;
     currentView: AppViews;
 }
 
@@ -25,6 +26,7 @@ const initialState: PreferencesState = {
         hasUnsavedChanges: false,
         selectedDay: GetCurrentDay(),
         selectedWeek: 0,
+        selectedClass: undefined,
         currentView: AppViews.Schedule
     }
 }
