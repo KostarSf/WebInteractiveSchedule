@@ -5,6 +5,10 @@
     margin: 0;
 }
 
+:root {
+    --vh: 1vh;
+}
+
 html {
     font-size: 10px;
     user-select: none;
@@ -12,6 +16,7 @@ html {
 
 body {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     margin: 0;
 
     background-color: #202020;
