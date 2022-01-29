@@ -1,5 +1,8 @@
 .dayHeader {
+    height: 60px;
+
     display: flex;
+    align-items: center;
     background-color: #F3F7FF;
 
     position: relative;
