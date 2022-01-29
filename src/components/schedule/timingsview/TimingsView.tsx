@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
-import style from './TimingsView.module.css';
-import ViewHeader from "../../shared/viewheader/ViewHeader";
-import {AppViews, ClassTime, Timing} from "../../../app/types";
+import {AppViews, ClassTime} from "../../../app/types";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {selectPreferences, setPreferences} from "../../../app/preferencesSlice";
-import ViewContent from "../../shared/viewcontent/ViewContent";
 import TimingsList from "./timingslist/TimingsList";
+import ViewContainer from "../../shared/viewcontainer/ViewContainer";
 
 const TimingsView = () => {
     const dispatch = useAppDispatch();
@@ -28,14 +26,13 @@ const TimingsView = () => {
     }
 
     return (
-        <div className={style.timingsView}>
-            <ViewHeader title={"Настройка времени"}
-                        backTo={AppViews.Schedule}
-                        onBack={saveTimingsHandle}/>
-            <ViewContent>
-                <TimingsList classTimes={scheduleData.classTimes} onChange={TimingsListOnChangeHandle}/>
-            </ViewContent>
-        </div>
+        <ViewContainer headerProps={{
+            title: "Настройка времени",
+            backTo: AppViews.Schedule,
+            onBack: saveTimingsHandle,
+        }}>
+            <TimingsList classTimes={scheduleData.classTimes} onChange={TimingsListOnChangeHandle}/>
+        </ViewContainer>
     );
 };
 
