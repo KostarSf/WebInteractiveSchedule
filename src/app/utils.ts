@@ -8,23 +8,23 @@ export function GetTestSchedule(): ScheduleData {
         classTimes: [
             {
                 order: 0,
-                begin: new Date(0, 0, 0, 8, 40).toString(),
-                end: new Date(0, 0, 0, 8, 50).toString(),
+                begin: new Date(0, 0, 0, 8, 40).toISOString(),
+                end: new Date(0, 0, 0, 8, 50).toISOString(),
             },
             {
                 order: 1,
-                begin: new Date(0, 0, 0, 9, 0).toString(),
-                end: new Date(0, 0, 0, 10, 30).toString(),
+                begin: new Date(0, 0, 0, 9, 0).toISOString(),
+                end: new Date(0, 0, 0, 10, 30).toISOString(),
             },
             {
                 order: 2,
-                begin: new Date(0, 0, 0, 10, 40).toString(),
-                end: new Date(0, 0, 0, 12, 10).toString(),
+                begin: new Date(0, 0, 0, 10, 40).toISOString(),
+                end: new Date(0, 0, 0, 12, 10).toISOString(),
             },
             {
                 order: 3,
-                begin: new Date(0, 0, 0, 12, 20).toString(),
-                end: new Date(0, 0, 0, 13, 50).toString(),
+                begin: new Date(0, 0, 0, 12, 20).toISOString(),
+                end: new Date(0, 0, 0, 13, 50).toISOString(),
             },
         ],
         weeks: [
