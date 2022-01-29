@@ -1,9 +1,9 @@
 import React, {FunctionComponent} from "react";
 import style from './EditTimingsButton.module.css';
 import editTimingsIcon from './editTimingsIcon.svg';
-import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {selectPreferences, setAppView} from "../../../../app/preferencesSlice";
-import {AppViews} from "../../../../app/types";
+import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
+import {selectPreferences, setAppView} from "../../../../../app/preferencesSlice";
+import {AppViews} from "../../../../../app/types";
 
 type EditTimingsButtonProps = {
 

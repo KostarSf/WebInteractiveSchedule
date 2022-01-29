@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import style from './TimingsView.module.css';
-import ViewHeader from "../../viewheader/ViewHeader";
+import ViewHeader from "../../shared/viewheader/ViewHeader";
 import {AppViews, ClassTime, Timing} from "../../../app/types";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {selectPreferences, setPreferences} from "../../../app/preferencesSlice";
-import ViewContent from "../../viewcontent/ViewContent";
+import ViewContent from "../../shared/viewcontent/ViewContent";
 import TimingsList from "./timingslist/TimingsList";
 
 const TimingsView = () => {

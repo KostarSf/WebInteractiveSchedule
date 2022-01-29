@@ -1,7 +1,7 @@
 import {FunctionComponent} from 'react';
 import DayButton, { DayData } from './daybutton/DayButton';
 import style from './WeekBar.module.css'
-import {ScheduleData} from "../../../app/types";
+import {ScheduleData} from "../../../../app/types";
 
 type WeekBarProps = {
     scheduleData: ScheduleData | undefined;

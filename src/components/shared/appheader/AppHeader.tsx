@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import styles from './AppHeader.module.css';
-import { useAppSelector } from '../../app/hooks';
-import { selectUser } from '../../app/userSlice';
+import { useAppSelector } from '../../../app/hooks';
+import { selectUser } from '../../../app/userSlice';
 
 interface Titles {
     title: string,

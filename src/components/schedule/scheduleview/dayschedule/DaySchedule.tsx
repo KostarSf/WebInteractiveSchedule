@@ -1,15 +1,15 @@
 import React, {cloneElement, FunctionComponent} from 'react';
 import ClassItem, {NewClassItem} from './classitem/ClassItem';
 import style from './DaySchedule.module.css'
-import {DayScheduleData, ScheduleData} from "../../../app/types";
-import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {DayScheduleData, ScheduleData} from "../../../../app/types";
+import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {
     selectPreferences,
     setPreferences,
     setPreferencesUpdateEditingDayScheduleData, switchMorningFormationState
-} from "../../../app/preferencesSlice";
-import {getDayNameById} from "../../../app/utils";
-import {selectUser} from "../../../app/userSlice";
+} from "../../../../app/preferencesSlice";
+import {getDayNameById} from "../../../../app/utils";
+import {selectUser} from "../../../../app/userSlice";
 
 type DayScheduleProps = {
     scheduleData: ScheduleData | undefined;

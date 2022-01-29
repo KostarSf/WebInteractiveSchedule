@@ -9,7 +9,7 @@ import checkBoxIcon from './checkBox.svg';
 import checkBoxCheckedIcon from './checkBox_checked.svg';
 import classNames from "classnames";
 import style from "./ClassItem.module.css";
-import {ClassItemData, ClassTime, LessonData} from "../../../../app/types";
+import {ClassItemData, ClassTime, LessonData} from "../../../../../app/types";
 
 type ClassItemProps = {
     data: ClassItemData,

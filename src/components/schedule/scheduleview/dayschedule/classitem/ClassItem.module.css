@@ -13,7 +13,7 @@
 
     overflow-x: auto;
 
-    composes: textRegular from '../../../../SharedStyles.module.css';
+    composes: textRegular from '../../../../../SharedStyles.module.css';
     text-align: left;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .clickable {
-    composes: clickableElement from '../../../../SharedStyles.module.css';
+    composes: clickableElement from '../../../../../SharedStyles.module.css';
 }
 
 .selected {
@@ -108,7 +108,7 @@
 }
 
 .groupName {
-    composes: textRegularCondensed from '../../../../SharedStyles.module.css';
+    composes: textRegularCondensed from '../../../../../SharedStyles.module.css';
 
     margin: 0 1rem;
 
@@ -124,15 +124,15 @@
 .teacher {
     flex-grow: 1;
 
-    composes: buttonStylesReset from '../../../../SharedStyles.module.css';
-    composes: textRegular from '../../../../SharedStyles.module.css';
+    composes: buttonStylesReset from '../../../../../SharedStyles.module.css';
+    composes: textRegular from '../../../../../SharedStyles.module.css';
 
     color: #9C9C9C;
     font-size: 1.4rem;
     line-height: 1.4rem;
     font-weight: 300;
 
-    composes: clickableElement from '../../../../SharedStyles.module.css';
+    composes: clickableElement from '../../../../../SharedStyles.module.css';
 }
 
 .current .teacher {

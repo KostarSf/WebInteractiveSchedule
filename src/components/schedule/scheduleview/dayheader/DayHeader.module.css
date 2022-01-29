@@ -22,7 +22,7 @@
 }
 
 .weekSwitcher {
-    composes: buttonStylesReset from '../../../SharedStyles.module.css';
+    composes: buttonStylesReset from '../../../../SharedStyles.module.css';
     text-transform: uppercase;
     text-align: center;
     width: 100%;
@@ -31,7 +31,7 @@
     justify-content: center;
     align-items: center;
 
-    composes: clickableElement from '../../../SharedStyles.module.css';
+    composes: clickableElement from '../../../../SharedStyles.module.css';
 }
 
 .weekSwitcherText {

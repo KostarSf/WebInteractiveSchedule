@@ -2,9 +2,9 @@ import React, {FunctionComponent} from "react";
 import style from './EditModeButton.module.css';
 import editModeIcon from './editModeIcon.svg';
 import closeIcon from './closeIcon.svg';
-import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
-import {selectPreferences, setPreferences} from "../../../../app/preferencesSlice";
-import {selectSchedule} from "../../../../app/scheduleSlice";
+import {useAppDispatch, useAppSelector} from "../../../../../app/hooks";
+import {selectPreferences, setPreferences} from "../../../../../app/preferencesSlice";
+import {selectSchedule} from "../../../../../app/scheduleSlice";
 
 type EditModeButtonProps = {
 

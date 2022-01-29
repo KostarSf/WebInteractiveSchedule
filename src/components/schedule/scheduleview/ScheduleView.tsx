@@ -1,11 +1,11 @@
-import DaySchedule from '../dayschedule/DaySchedule';
-import WeekBar from '../weekbar/WeekBar';
+import DaySchedule from './dayschedule/DaySchedule';
+import WeekBar from './weekbar/WeekBar';
 import style from './ScheduleView.module.css';
 import {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {selectSchedule} from "../../../app/scheduleSlice";
 import {selectPreferences, setPreferences} from "../../../app/preferencesSlice";
-import DayHeader from "../dayheader/DayHeader";
+import DayHeader from "./dayheader/DayHeader";
 
 function ScheduleView() {
     const preferences = useAppSelector(selectPreferences);
