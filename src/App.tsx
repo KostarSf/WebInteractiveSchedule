@@ -10,6 +10,7 @@ import {GetTestSchedule} from "./app/utils";
 import {selectPreferences, setPreferences} from "./app/preferencesSlice";
 import {AppViews} from "./app/types";
 import TimingsView from "./components/schedule/timingsview/TimingsView";
+import ClassView from "./components/schedule/classview/ClassView";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -42,6 +43,10 @@ function App() {
         }
         case AppViews.TimingsEdit: {
             currentView = <TimingsView />
+            break;
+        }
+        case AppViews.ClassEdit: {
+            currentView = <ClassView />
             break;
         }
         default: {
