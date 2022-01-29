@@ -3,7 +3,7 @@ import style from './ViewHeader.module.css';
 import {AppViews} from "../../../app/types";
 import BackButton from "./backbutton/BackButton";
 
-type ViewHeaderProps = {
+export type ViewHeaderProps = {
     title: string,
     backTo: AppViews,
     onBack?: () => void,
