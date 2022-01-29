@@ -17,7 +17,9 @@ function getWorkingDays(scheduleData: ScheduleData | undefined,
     let workingDays: number[] = [];
     scheduleData.weeks.find(week => week.weekId === selectedWeek)
                 ?.days.forEach((day) => {
-        workingDays.push(day.dayId);
+        if (day.classes.length > 0) {
+            workingDays.push(day.dayId);
+        }
     })
 
     return workingDays;
