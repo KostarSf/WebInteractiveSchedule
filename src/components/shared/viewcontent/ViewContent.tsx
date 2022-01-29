@@ -2,7 +2,7 @@ import React, {FunctionComponent, PropsWithChildren} from 'react';
 import style from './ViewContent.module.css';
 
 type ViewContentProps = {
-    children: JSX.Element,
+    children: JSX.Element[] | JSX.Element,
 }
 
 const ViewContent: FunctionComponent<PropsWithChildren<ViewContentProps>> = ({
