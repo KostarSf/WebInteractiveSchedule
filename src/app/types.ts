@@ -66,3 +66,10 @@ export interface LessonData {
     place?: string,
     subgroupId?: number,
 }
+
+export interface Timing {
+    order: number,
+    name: string,
+    beginTime: string,
+    endTime: string,
+}
