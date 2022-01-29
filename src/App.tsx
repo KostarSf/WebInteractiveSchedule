@@ -8,6 +8,8 @@ import { setUser } from './app/userSlice';
 import { setSchedule } from './app/scheduleSlice';
 import {GetTestSchedule} from "./app/utils";
 import {selectPreferences, setPreferences} from "./app/preferencesSlice";
+import {AppViews} from "./app/types";
+import TimingsView from "./components/schedule/timingsview/TimingsView";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -16,6 +18,7 @@ function App() {
     const [headless, setHeadless] = useState(false);
 
     useEffect(() => {
+
         const userToken = 'XVlBzgbaiCMRAjWwhTHctcuAxhxKQFDaFpLSjFbc';
         FetchUserByToken(userToken, (user) => {
             dispatch(setUser(user));
@@ -30,7 +33,22 @@ function App() {
         });
     }, [])
 
-    const currentView = <ScheduleView />;
+    let currentView: JSX.Element;
+
+    switch (preferences.currentView) {
+        case AppViews.Schedule: {
+            currentView = <ScheduleView />
+            break;
+        }
+        case AppViews.TimingsEdit: {
+            currentView = <TimingsView />
+            break;
+        }
+        default: {
+            currentView = <ScheduleView />
+            break;
+        }
+    }
 
     return (
         <div className={styles.App}>
