@@ -1,9 +1,15 @@
-import React, {FunctionComponent} from 'react';
-import ClassItem from './classitem/ClassItem';
+import React, {cloneElement, FunctionComponent} from 'react';
+import ClassItem, {NewClassItem} from './classitem/ClassItem';
 import style from './DaySchedule.module.css'
 import {DayScheduleData, ScheduleData} from "../../../app/types";
-import {useAppSelector} from "../../../app/hooks";
-import {selectPreferences} from "../../../app/preferencesSlice";
+import {useAppDispatch, useAppSelector} from "../../../app/hooks";
+import {
+    selectPreferences,
+    setPreferences,
+    setPreferencesUpdateEditingDayScheduleData, switchMorningFormationState
+} from "../../../app/preferencesSlice";
+import {getDayNameById} from "../../../app/utils";
+import {selectUser} from "../../../app/userSlice";
 
 type DayScheduleProps = {
     scheduleData: ScheduleData | undefined;
@@ -20,22 +26,37 @@ const DaySchedule: FunctionComponent<DayScheduleProps> = ({
     const currentDay = false;
 
     const preferences = useAppSelector(selectPreferences);
+    const dispatch = useAppDispatch();
 
-    let classesList = undefined;
-    if (schedule !== undefined && scheduleData !== undefined) {
-        if (preferences.editMode) {
-            for (let i = 0; i < scheduleData.classTimes.length; i++) {
-                // TODO Решить как тут все развернуть со списком пар в режиме редактирования
+    const onClassClickHandle = (order: number) => {
+        if (preferences.editMode === false) return;
+
+        if (order === 0) {
+            dispatch(switchMorningFormationState({selectedWeek, selectedDay}));
+        }
+    }
+
+    let classesList: JSX.Element[] = [];
+    if (scheduleData !== undefined) {
+        const lastorder = Math.max.apply(Math, scheduleData.classTimes.map(sd => sd.order));
+        for (let i = 0; i <= lastorder; i++) {
+            const classTime = scheduleData.classTimes.find(e => e.order === i);
+            if (classTime === undefined) continue;
+
+            const classItemData = schedule?.classes.find(ci => ci.order === i);
+
+            if (classItemData) {
+                if (i === 0 && preferences.editMode) {
+                    classesList.push(<NewClassItem order={i} key={i} onClick={onClassClickHandle}
+                                                   classTime={classTime} checked={true}/>);
+                } else {
+                    classesList.push(<ClassItem data={classItemData} clickable={preferences.editMode}
+                                                key={i} classTime={classTime} onClick={onClassClickHandle}/>);
+                }
+            } else if (preferences.editMode) {
+                classesList.push(<NewClassItem order={i} key={i} onClick={onClassClickHandle}
+                                               classTime={classTime}/>);
             }
-        } else {
-            classesList = schedule.classes.map(cls => {
-                //let current = cls.order === 1;
-                return (
-                    <ClassItem data={cls} key={cls.order}
-                               classTimes={scheduleData.classTimes}
-                        /*current={current}*/ />
-                )
-            })
         }
     }
 
@@ -59,12 +80,24 @@ const DaySchedule: FunctionComponent<DayScheduleProps> = ({
 
 function getDayScheduleByDayId(schedule: ScheduleData | undefined,
                                dayId: number,
-                               weekId: number): DayScheduleData | undefined {
-    if (schedule === undefined) return undefined;
+                               weekId: number): DayScheduleData {
+    const blankSchedule: DayScheduleData = {
+        dayId: dayId,
+        dayName: getDayNameById(dayId),
+        classes: []
+    };
 
-    return schedule.weeks[weekId].days.find((day) => {
+    if (schedule === undefined) return blankSchedule;
+
+    const daySchedule = schedule.weeks[weekId].days.find((day) => {
         return day.dayId === dayId;
     });
+
+    if (daySchedule === undefined) {
+        return blankSchedule;
+    } else {
+        return daySchedule;
+    }
 }
 
 export default DaySchedule;

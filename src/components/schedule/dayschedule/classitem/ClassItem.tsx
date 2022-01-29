@@ -4,23 +4,29 @@ import labIcon from './labIcon.svg';
 import lectureIcon from './lectureIcon.svg';
 import mixedIcon from './mixedIcon.svg';
 import practiceIcon from './practiceIcon.svg';
+import addIcon from './addIcon.svg';
+import checkBoxIcon from './checkBox.svg';
+import checkBoxCheckedIcon from './checkBox_checked.svg';
 import classNames from "classnames";
 import style from "./ClassItem.module.css";
 import {ClassItemData, ClassTime, LessonData} from "../../../../app/types";
 
 type ClassItemProps = {
     data: ClassItemData,
-    classTimes: ClassTime[],
-    current?: boolean
+    classTime: ClassTime,
+    current?: boolean,
+    clickable?: boolean,
+    onClick?: (order: number) => void,
 }
 
 const ClassItem: FunctionComponent<ClassItemProps> = ({
     data,
-    classTimes,
-    current = false
+    classTime,
+    current = false,
+    clickable = false,
+    onClick,
 }) => {
-    const time = getClassTimeByOrder(classTimes, data.order);
-    const [displayBeginTime, displayEndTime] = getDisplayTime(time);
+    const [displayBeginTime, displayEndTime] = getDisplayTime(classTime);
 
     let lessonItems = data.lessons.map(lesson => {
         return (
@@ -31,11 +37,16 @@ const ClassItem: FunctionComponent<ClassItemProps> = ({
 
     let className = classNames(
         style.classItem,
-        {[style.current]: current}
+        {[style.current]: current},
+        {[style.clickable]: clickable}
     )
 
+    const onClickHandle = () => {
+        onClick?.call(null, data.order);
+    }
+
     return (
-        <div className={className}>
+        <button className={className} onClick={onClickHandle}>
             <div className={styles.timeColumn}>
                 <p className={styles.beginTime}>{displayBeginTime}</p>
                 {!data.hideEndTime && <p className={styles.endTime}>{displayEndTime}</p>}
@@ -43,17 +54,59 @@ const ClassItem: FunctionComponent<ClassItemProps> = ({
             <div className={styles.infoColumn}>
                 {lessonItems}
             </div>
-        </div>
+        </button>
     );
 };
 
-function getClassTimeByOrder(classTimes: ClassTime[], order: number): ClassTime {
-    const classTime = classTimes.find(classTime => classTime.order === order);
-    if (classTime) {
-        return classTime;
-    } else {
-        throw new Error("There is no classTime with order: " + order);
+type NewClassItemProps = {
+    order: number,
+    classTime: ClassTime,
+    checked?: boolean,
+    onClick: (order: number) => void,
+}
+
+export const NewClassItem: FunctionComponent<NewClassItemProps> = ({
+    order,
+    classTime,
+    checked = false,
+    onClick,
+}) => {
+    const [displayBeginTime] = getDisplayTime(classTime);
+
+    let lessonName = "Пара " + order;
+    let iconRef = addIcon;
+
+    if (order === 0) {
+        lessonName = "Построение";
+        iconRef = checked ? checkBoxCheckedIcon : checkBoxIcon;
     }
+
+    let className = classNames(
+        style.classItem,
+        style.newClassItem,
+        style.clickable,
+        {[style.selected]: checked},
+    )
+
+    const onClickHande = () => {
+        onClick?.call(null, order);
+    }
+
+    return (
+        <button className={className} onClick={onClickHande}>
+            <div className={styles.timeColumn}>
+                <p className={styles.beginTime}>{displayBeginTime}</p>
+            </div>
+            <div className={styles.infoColumn}>
+                <div className={styles.lesson}>
+                    <div className={styles.primaryInfo}>
+                        <p className={styles.name}>{lessonName}</p>
+                        <img src={iconRef} className={styles.type} alt='class type'/>
+                    </div>
+                </div>
+            </div>
+        </button>
+    )
 }
 
 type LessonProps = {
@@ -80,7 +133,7 @@ const LessonItem: FunctionComponent<LessonProps> = ({data}) => {
             </div>
             {showSecondaryInfo &&
                 <div className={styles.secondaryInfo}>
-                    {data.teacher && <button className={styles.teacher} onClick={onTeacherNameClickHandle}>{teacherName}</button>}
+                    {data.teacher && <div className={styles.teacher} onClick={onTeacherNameClickHandle} tabIndex={0}>{teacherName}</div>}
                     {data.place && <p className={styles.place}>{data.place}</p>}
                 </div>
             }

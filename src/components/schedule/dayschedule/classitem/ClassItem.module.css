@@ -2,11 +2,33 @@
     display: flex;
     align-items: center;
 
-    padding: 1.5rem 2rem;
+    padding: 1rem;
+    margin: 1rem 1rem;
 
+    appearance: none;
+    background: none;
+
+    border: 1px solid transparent;
     border-radius: 0.3rem;
 
     overflow-x: auto;
+
+    composes: textRegular from '../../../../SharedStyles.module.css';
+    text-align: left;
+}
+
+.newClassItem {
+    padding: 1rem;
+    border: 1px dashed #969696;
+}
+
+.clickable {
+    composes: clickableElement from '../../../../SharedStyles.module.css';
+}
+
+.selected {
+    border-color: transparent;
+    background-color: #99B9F5;
 }
 
 .current {
@@ -28,6 +50,11 @@
     font-weight: 500;
 }
 
+.newClassItem .beginTime {
+    color: #969696;
+}
+
+.selected .beginTime,
 .current .beginTime {
     color: white;
 }
@@ -71,6 +98,11 @@
     line-height: 1.6rem;
 }
 
+.newClassItem .name {
+    color: #969696;
+}
+
+.selected .name,
 .current .name {
     color: white;
 }
@@ -93,11 +125,12 @@
     flex-grow: 1;
 
     composes: buttonStylesReset from '../../../../SharedStyles.module.css';
+    composes: textRegular from '../../../../SharedStyles.module.css';
 
     color: #9C9C9C;
     font-size: 1.4rem;
     line-height: 1.4rem;
-    font-weight: lighter;
+    font-weight: 300;
 
     composes: clickableElement from '../../../../SharedStyles.module.css';
 }
