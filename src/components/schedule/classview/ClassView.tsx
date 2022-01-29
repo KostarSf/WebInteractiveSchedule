@@ -1,11 +1,24 @@
 import React from 'react';
-import style from './ClassView.module.css';
+import ViewContainer from "../../shared/viewcontainer/ViewContainer";
+import {useAppSelector} from "../../../app/hooks";
+import {selectPreferences} from "../../../app/preferencesSlice";
+import {AppViews} from "../../../app/types";
 
 const ClassView = () => {
-    return (
-        <div>
+    const preferences = useAppSelector(selectPreferences);
 
-        </div>
+    const classSaveHandle = () => {
+
+    }
+
+    return (
+        <ViewContainer headerProps={{
+            title: "Пара " + preferences.selectedClass,
+            backTo: AppViews.Schedule,
+            onBack: classSaveHandle,
+        }}>
+
+        </ViewContainer>
     );
 };
 
