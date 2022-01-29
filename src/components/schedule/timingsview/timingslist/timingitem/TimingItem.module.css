@@ -1,0 +1,58 @@
+.timingItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 2rem;
+}
+
+.timingItem:not(:last-child) {
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.name {
+    margin-right: 2rem;
+    white-space: nowrap;
+}
+
+.timesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    margin: -0.5rem;
+}
+
+@media (max-width: 360px) {
+    .timingItem {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .name {
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    .timesContainer {
+        justify-content: center;
+    }
+}
+
+.timeBeginField {
+    width: 12rem;
+    padding: 0.5rem 1rem;
+
+    margin: 0.5rem;
+
+    background: white;
+    border: 1px solid #DEDEDE;
+    border-radius: 0.1rem;
+
+    composes: textRegular from '../../../../../SharedStyles.module.css';
+}
+
+.timeEndField {
+    composes: timeBeginField;
+    color: #9C9C9C;
+}
