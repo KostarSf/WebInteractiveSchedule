@@ -3,6 +3,7 @@ import ViewContainer from "../../shared/viewcontainer/ViewContainer";
 import {useAppSelector} from "../../../app/hooks";
 import {selectPreferences} from "../../../app/preferencesSlice";
 import {AppViews} from "../../../app/types";
+import {getDayNameById} from "../../../app/utils";
 
 const ClassView = () => {
     const preferences = useAppSelector(selectPreferences);
@@ -11,9 +12,11 @@ const ClassView = () => {
 
     }
 
+    const headerTitle = `${getDayNameById(preferences.selectedDay)} — пара ${preferences.selectedClass}`;
+
     return (
         <ViewContainer headerProps={{
-            title: "Пара " + preferences.selectedClass,
+            title: headerTitle,
             backTo: AppViews.Schedule,
             onBack: classSaveHandle,
         }}>
