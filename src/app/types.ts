@@ -1,3 +1,9 @@
+export enum AppViews {
+    Schedule,
+    TimingsEdit,
+    ClassEdit
+}
+
 export type UserData = {
     id: number;
     status: string;
