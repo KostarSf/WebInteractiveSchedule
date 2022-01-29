@@ -4,6 +4,7 @@ import {useAppSelector} from "../../../app/hooks";
 import {selectPreferences} from "../../../app/preferencesSlice";
 import {AppViews} from "../../../app/types";
 import {getDayNameById} from "../../../app/utils";
+import LessonProperties from "./lessonproperties/LessonProperties";
 
 const ClassView = () => {
     const preferences = useAppSelector(selectPreferences);
@@ -20,7 +21,7 @@ const ClassView = () => {
             backTo: AppViews.Schedule,
             onBack: classSaveHandle,
         }}>
-
+            <LessonProperties />
         </ViewContainer>
     );
 };
