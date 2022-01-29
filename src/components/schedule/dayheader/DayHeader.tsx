@@ -4,6 +4,7 @@ import {ScheduleData} from "../../../app/types";
 import weekSwitcherIcon from "./weekSwitcherIcon.svg";
 import EditModeButton from "./editmodebutton/EditModeButton";
 import EditTimingsButton from "./edittimingsbutton/EditTimingsButton";
+import {getDayNameById} from "../../../app/utils";
 
 type DayHeaderProps = {
     scheduleData: ScheduleData | undefined;
@@ -58,27 +59,6 @@ function getNextWeekId(scheduleData: ScheduleData | undefined,
         return 0;
     } else {
         return selectedWeek + 1;
-    }
-}
-
-function getDayNameById(id: number): string {
-    switch (id) {
-        case 0:
-            return 'Понедельник';
-        case 1:
-            return 'Вторник';
-        case 2:
-            return 'Среда';
-        case 3:
-            return 'Четверг';
-        case 4:
-            return 'Пятница';
-        case 5:
-            return 'Суббота';
-        case 6:
-            return 'Воскресенье';
-        default:
-            throw new Error("Incorrect day id. Expected: 0..6, received: " + id);
     }
 }
 
