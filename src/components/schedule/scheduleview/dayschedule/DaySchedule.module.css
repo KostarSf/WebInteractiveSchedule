@@ -21,8 +21,8 @@
 
 .classesContainer {
     flex: 1;
-    max-width: 640px;
-    padding: 1rem;
+    max-width: 620px;
+    padding: 2rem;
     background-color: white;
 
     display: flex;

@@ -9,9 +9,11 @@ const ViewContent: FunctionComponent<PropsWithChildren<ViewContentProps>> = ({
     children
 }) => {
     return (
-        <div className={style.viewContent}>
-            <div className={style.scrollContainer}>
-                {children}
+        <div className={style.viewContentContainer}>
+            <div className={style.viewContent}>
+                <div className={style.scrollContainer}>
+                    {children}
+                </div>
             </div>
         </div>
     );
