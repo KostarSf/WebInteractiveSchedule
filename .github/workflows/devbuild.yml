@@ -23,9 +23,8 @@ jobs:
       - name: Install SSH key
         run: |
           mkdir -p ~/.ssh/
+          ssh-keygen
           echo -e 'Host *\n\tStrictHostKeyChecking no\n\n' > ~/.ssh/config
-          echo "${{ secrets.SSH_KEY_KSF }}" > ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
 
       - name: Deploy 🚀
         run: docker-compose up -d --build
