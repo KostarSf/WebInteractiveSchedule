@@ -1,12 +1,15 @@
-name: pullrequest
+name: devbuild
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
 
 jobs:
-  pullrequest:
+  devbuild:
     runs-on: ${{ matrix.os }}
 
     strategy:
