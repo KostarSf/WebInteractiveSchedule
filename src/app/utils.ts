@@ -1,4 +1,4 @@
-import {ScheduleData} from "./types";
+import {DayScheduleData, LessonData, ScheduleData} from "./types";
 
 export function GetTestSchedule(): ScheduleData {
     return {
@@ -75,6 +75,46 @@ export function GetTestSchedule(): ScheduleData {
             }
         ]
     }
+}
+
+
+export function getDayScheduleByDayId(schedule: ScheduleData | undefined,
+                                      dayId: number,
+                                      weekId: number): DayScheduleData {
+    const blankSchedule: DayScheduleData = {
+        dayId: dayId,
+        dayName: getDayNameById(dayId),
+        classes: []
+    };
+
+    if (schedule === undefined) return blankSchedule;
+
+    const weekSchedule = schedule.weeks.find(week => week.weekId === weekId);
+    if (weekSchedule === undefined) return blankSchedule;
+
+    const daySchedule = weekSchedule.days.find((day) => {
+        return day.dayId === dayId;
+    });
+
+    if (daySchedule === undefined) {
+        return blankSchedule;
+    } else {
+        return daySchedule;
+    }
+}
+
+export function getLessonsData(schedule: ScheduleData | undefined,
+                             weekId: number,
+                             dayId: number,
+                             classOrder: number): LessonData[] {
+
+    const dayData = getDayScheduleByDayId(schedule, dayId, weekId);
+    if (dayData === undefined) return [];
+
+    const classItem = dayData.classes.find(classItem => classItem.order === classOrder);
+    if (classItem === undefined) return [];
+
+    return classItem.lessons;
 }
 
 export function getDayNameById(id: number): string {
