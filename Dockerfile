@@ -1,8 +1,8 @@
 FROM node:14-alpine as build
 WORKDIR /app
 RUN npm i -g typescript
-COPY . ./
 RUN npm ci
+COPY . ./
 RUN npm run build
 
 FROM nginx:stable-alpine
