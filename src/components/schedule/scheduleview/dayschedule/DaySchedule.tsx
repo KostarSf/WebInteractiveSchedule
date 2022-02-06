@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import ClassItem, {NewClassItem} from './classitem/ClassItem';
 import style from './DaySchedule.module.css'
-import {AppViews, DayScheduleData, ScheduleData} from "../../../../app/types";
+import {AppViews, ScheduleData} from "../../../../app/types";
 import {useAppDispatch, useAppSelector} from "../../../../app/hooks";
 import {
     selectPreferences,
@@ -9,7 +9,7 @@ import {
     setPreferences,
     switchMorningFormationState
 } from "../../../../app/preferencesSlice";
-import {getDayNameById} from "../../../../app/utils";
+import {getDayScheduleByDayId} from "../../../../app/utils";
 
 type DayScheduleProps = {
     scheduleData: ScheduleData | undefined;
