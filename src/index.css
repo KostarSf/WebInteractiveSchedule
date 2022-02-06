@@ -29,19 +29,3 @@ html, body {
 #root {
     height: 100%;
 }
-
-/*!* For testing purposes *!*/
-/*@media (min-width: 500px) {*/
-/*    body {*/
-/*        display: flex;*/
-/*        align-items: center;*/
-/*        justify-content: center;*/
-/*    }*/
-
-/*    #root {*/
-/*        width: 360px;*/
-/*        height: 590px;*/
-
-/*        border-radius: 0.3rem;*/
-/*    }*/
-/*}*/
