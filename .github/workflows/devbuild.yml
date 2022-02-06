@@ -25,7 +25,6 @@ jobs:
           mkdir -p ~/.ssh/
           echo -e 'Host *\n\tStrictHostKeyChecking no\n\n' > ~/.ssh/config
           echo "${{ secrets.SSH_KEY_KSF }}" > ~/.ssh/id_rsa
-          ssh-keyscan -t rsa ${{ secrets.SSH_HOST_KSF }} >> ~/.ssh/known_hosts
           chmod 400 ~/.ssh/id_rsa
 
       - name: Deploy 🚀
