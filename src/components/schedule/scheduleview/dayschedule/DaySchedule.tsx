@@ -81,26 +81,4 @@ const DaySchedule: FunctionComponent<DayScheduleProps> = ({
     );
 };
 
-function getDayScheduleByDayId(schedule: ScheduleData | undefined,
-                               dayId: number,
-                               weekId: number): DayScheduleData {
-    const blankSchedule: DayScheduleData = {
-        dayId: dayId,
-        dayName: getDayNameById(dayId),
-        classes: []
-    };
-
-    if (schedule === undefined) return blankSchedule;
-
-    const daySchedule = schedule.weeks[weekId].days.find((day) => {
-        return day.dayId === dayId;
-    });
-
-    if (daySchedule === undefined) {
-        return blankSchedule;
-    } else {
-        return daySchedule;
-    }
-}
-
 export default DaySchedule;
