@@ -35,7 +35,7 @@ const DaySchedule: FunctionComponent<DayScheduleProps> = ({
             dispatch(switchMorningFormationState({selectedWeek, selectedDay}));
         } else {
             dispatch(setPreferences({...preferences, selectedClass: order}));
-            dispatch(setAppView(AppViews.ClassEdit));
+            setTimeout(() => dispatch(setAppView(AppViews.ClassEdit)), 100);
         }
     }
 
