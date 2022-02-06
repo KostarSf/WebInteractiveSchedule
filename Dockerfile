@@ -1,6 +1,7 @@
 FROM node:14-alpine as build
 WORKDIR /app
 RUN npm i -g typescript
+COPY package.json package-lock.json ./
 RUN npm ci
 COPY . ./
 RUN npm run build
