@@ -1,17 +1,17 @@
-name: deploy
+name: pullrequest
 
 on:
-  push:
+  pull_request:
     branches:
       - master
 
 jobs:
-  deploy:
+  pullrequest:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [ubuntu-18.04]
+        os: [ubuntu-20.04]
 
     steps:
       - name: Checkout 🛎
