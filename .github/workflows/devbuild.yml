@@ -1,4 +1,4 @@
-name: devbuild
+name: Deploy to dev server
 
 on:
   push:
