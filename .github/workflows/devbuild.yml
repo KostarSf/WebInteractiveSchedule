@@ -23,7 +23,7 @@ jobs:
       - name: Install SSH key
         run: |
           mkdir -p ~/.ssh/
-          ssh-keygen
+          ssh-keygen -f ~/.ssh/id_rsa -N ''
           echo -e 'Host *\n\tStrictHostKeyChecking no\n\n' > ~/.ssh/config
 
       - name: Deploy 🚀
