@@ -21,11 +21,9 @@ jobs:
         uses: actions/checkout@master
 
       - name: Install SSH key
-        run: |
-          mkdir -p ~/.ssh/
-          echo -e 'Host *\n\tStrictHostKeyChecking no\n\n' > ~/.ssh/config
-          echo "${{ secrets.SSH_KEY_KSF }}" > ~/.ssh/id_rsa
-          chmod 400 ~/.ssh/id_rsa
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY_KSF }}
 
       - name: Deploy 🚀
         run: docker-compose up -d --build
