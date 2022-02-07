@@ -4,3 +4,6 @@ services:
   app:
     image: kostarsf/web-interactive-schedule:latest
     restart: always
+    ports:
+      - "80:80"
+      - "443:443"
