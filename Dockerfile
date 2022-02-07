@@ -1,12 +1,11 @@
-FROM node:14-alpine as build
+FROM node:16-alpine as build
 WORKDIR /app
-RUN npm i -g typescript
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json yarn.lock ./
+RUN yarn install --production
 COPY . ./
-RUN npm run build
+RUN yarn run build
 
 FROM nginx:stable-alpine
-COPY --from=build /app/build /var/www/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 CMD ["nginx", "-g", "daemon off;"]
