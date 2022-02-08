@@ -1,4 +1,4 @@
-name: Build and push to DockerHub
+name: Build and push to DockerHub and Staging
 
 on:
   push:
@@ -33,3 +33,6 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/web-interactive-schedule:staging
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/web-interactive-schedule:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/web-interactive-schedule:buildcache,mode=max
+
+      - name: Deploy on Staging
+        run: curl ${{ secrets.STAGING_HOOK_DOMAIN }}/hooks/redeploy-staging?token=${{ secrets.STAGING_HOOK_TOKEN }}
