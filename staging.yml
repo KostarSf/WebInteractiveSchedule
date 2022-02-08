@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   app:
-    image: kostarsf/web-interactive-schedule:latest
+    image: kostarsf/web-interactive-schedule:staging
     restart: always
     ports:
       - "80:80"
