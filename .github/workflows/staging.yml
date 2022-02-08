@@ -2,11 +2,8 @@ name: Build and push to DockerHub
 
 on:
   push:
-    branches-ignore:
-      - main
-      - dev
     tags:
-      - 'v*'
+      - 'v*-staging'
 
   workflow_dispatch:
 
