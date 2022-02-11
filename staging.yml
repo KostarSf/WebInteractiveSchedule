@@ -1,9 +1,0 @@
-version: "3.8"
-
-services:
-  web-interactive-schedule:
-    image: kostarsf/web-interactive-schedule:staging
-    container_name: web-interactive-schedule
-    restart: always
-    ports:
-      - "8001:80"
