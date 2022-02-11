@@ -1,16 +1,15 @@
-name: Build and push to DockerHub
+name: Build and push to DockerHub and Staging
 
 on:
   push:
-    branches:
-      - 'staging'
+    tags:
+      - 'v*-staging'
 
   workflow_dispatch:
 
 jobs:
   push:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -34,3 +33,6 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/web-interactive-schedule:staging
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/web-interactive-schedule:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/web-interactive-schedule:buildcache,mode=max
+
+      - name: Deploy on Staging
+        run: curl ${{ secrets.STAGING_HOOK_DOMAIN }}/hooks/redeploy-staging?token=${{ secrets.STAGING_HOOK_TOKEN }}
