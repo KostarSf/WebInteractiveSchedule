@@ -11,12 +11,12 @@ import {Stack, styled, ToggleButton, ToggleButtonGroup} from "@mui/material";
 const ClassView = () => {
     const preferences = useAppSelector(selectPreferences);
 
-    const [noDivision, setNoDivision] = useState<true | null>(true);
-    const [subgroups, setSubgroups] = useState<number[]>(() => []);
-
     const [lessons, setLessons] = useState<LessonData[]>(
-            getLessonsData(preferences.editingScheduleData, preferences.selectedWeek,
-                preferences.selectedDay, preferences.selectedClass));
+        getLessonsData(preferences.editingScheduleData, preferences.selectedWeek,
+            preferences.selectedDay, preferences.selectedClass));
+
+    const [noDivision, setNoDivision] = useState<true | null>(usedSubgroups(lessons).length > 0 ? null : true);
+    const [subgroups, setSubgroups] = useState<number[]>(usedSubgroups(lessons));
 
     const noDivisionButtonHandle = (
         event: React.MouseEvent<HTMLElement>,
@@ -81,6 +81,18 @@ const ClassView = () => {
         </ViewContainer>
     );
 };
+
+function usedSubgroups(lessons: LessonData[]): number[] {
+    let subgroups: number[] = [];
+
+    lessons.forEach(lesson => {
+        if (lesson.subgroupId !== undefined) {
+            subgroups.push(lesson.subgroupId);
+        }
+    });
+
+    return subgroups;
+}
 
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({theme}) => ({
     "& .MuiToggleButton-root": {
