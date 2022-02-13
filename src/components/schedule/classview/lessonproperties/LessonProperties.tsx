@@ -49,7 +49,7 @@ const LessonProperties: FunctionComponent<LessonPropertiesProps> = ({
                     <StyledFormControl variant={"outlined"} size={"small"} fullWidth>
                         <InputLabel>Тип</InputLabel>
                         <Select
-                            value={lessonType}
+                            value={lessonType === undefined ? "" : lessonType}
                             onChange={event => setLessonType(event.target.value)}
                             label={"Тип"}
                         >
