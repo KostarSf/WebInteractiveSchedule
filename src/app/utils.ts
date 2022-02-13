@@ -139,11 +139,13 @@ export function getLessonsData(schedule: ScheduleData | undefined,
                              dayId: number,
                              classOrder: number): LessonData[] {
 
+    const blankLessonData: LessonData[] = [{ name: "" }];
+
     const dayData = getDayScheduleByDayId(schedule, dayId, weekId);
-    if (dayData === undefined) return [];
+    if (dayData === undefined) return blankLessonData;
 
     const classItem = dayData.classes.find(classItem => classItem.order === classOrder);
-    if (classItem === undefined) return [];
+    if (classItem === undefined) return blankLessonData;
 
     return classItem.lessons;
 }
